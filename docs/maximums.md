@@ -1,0 +1,7 @@
+- updated Red Hat exp. resume (16 months)
+- prescreen (immediate)
+  - top to bottom
+  - date
+  - everything filled out
+  - TalentCentral
+- 2 references
