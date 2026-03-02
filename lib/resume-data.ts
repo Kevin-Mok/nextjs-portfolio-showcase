@@ -327,7 +327,7 @@ const redHatSupportExperience: WorkExperience = {
   company: 'Red Hat',
   title: 'Technical Support Engineer Intern (Tier 1/2)',
   languages: ['Ticketing/Triage', 'De-escalation', 'Knowledge Base Writing'],
-  date: 'Jan 2023 — Aug 2024',
+  date: 'Aug 2022 — Aug 2024',
   bullets: [
     '<strong>Authored a 500+ line comprehensive training manual</strong> and onboarding guide that <strong>reduced the need for manual troubleshooting support by 60%</strong>, enabling new users to resolve issues independently.',
     '<strong>Resolved critical system issues for Fortune 500 clients, improving overall service reliability by 40%</strong> and <strong>preventing recurring technical glitches</strong> for high-priority accounts through proactive root-cause analysis.',
