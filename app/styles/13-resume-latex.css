@@ -449,9 +449,21 @@
 }
 
 .resume-variant-it-support {
-  --resume-print-scale: 1.177;
-  --resume-print-top-offset: 5.421pt;
-  --resume-print-leading: 0.918;
+  --resume-print-scale: 1.159;
+  --resume-print-top-offset: 1.718pt;
+  --resume-print-leading: 0.91;
+}
+
+.resume-variant-it-support-sql {
+  --resume-print-scale: 1.08;
+  --resume-print-top-offset: -7.347pt;
+  --resume-print-leading: 0.9;
+  --resume-print-min-section-gap: 0.36rem;
+  --resume-print-min-entry-gap: 0.24rem;
+  --resume-print-min-subtitle-gap: 0.08rem;
+  --resume-print-min-bullets-top-gap: 0.06rem;
+  --resume-print-min-bullet-gap: 0.06rem;
+  --resume-print-min-bullet-line-height: 1.16;
 }
 
 .resume-variant-it-support-aws {

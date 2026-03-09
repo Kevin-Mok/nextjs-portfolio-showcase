@@ -11,6 +11,7 @@ export const resumePdfVariants = [
   { id: 'aws-web-dev', fileName: 'kevin-mok-resume-aws-web-dev.pdf' },
   { id: 'aws-python', fileName: 'kevin-mok-resume-aws-python.pdf' },
   { id: 'it-support', fileName: 'kevin-mok-resume-it-support.pdf' },
+  { id: 'it-support-sql', fileName: 'kevin-mok-resume-it-support-sql.pdf' },
   { id: 'it-support-aws', fileName: 'kevin-mok-resume-it-support-aws.pdf' },
   { id: 'sales', fileName: 'kevin-mok-resume-sales.pdf' },
   { id: 'call-centre', fileName: 'kevin-mok-resume-call-centre.pdf' },

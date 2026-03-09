@@ -6,7 +6,7 @@ Source of truth:
 - `lib/resume-data.ts` (`resumeVariants`)
 - `scripts/lib/resume-pdf-variants.mjs` (`resumePdfVariants`)
 
-Canonical active variants: 10
+Canonical active variants: 11
 
 ## Positioning Matrix
 
@@ -19,13 +19,14 @@ Canonical active variants: 10
 | `aws-python` | AWS + Python | `kevin-mok-resume-aws-python.pdf` | Cloud automation with Python backend depth | Engineer who combines Python backend execution with AWS/Kubernetes operations. |
 | `web-dev-django` | Python + Django | `kevin-mok-resume-web-dev-django.pdf` | Django-oriented web/backend positions | Python web engineer with Django strength plus production-facing development history. |
 | `it-support` | IT Support | `kevin-mok-resume-it-support.pdf` | Technical support and incident handling | Tier 1/2 support profile focused on triage, troubleshooting, KB writing, and user communication. |
+| `it-support-sql` | IT Support + SQL | `kevin-mok-resume-it-support-sql.pdf` | SQL-forward support and troubleshooting roles | Tier 1/2 support engineer with PostgreSQL-backed query optimization and documentation-heavy troubleshooting outcomes. |
 | `it-support-aws` | IT Support + AWS | `kevin-mok-resume-it-support-aws.pdf` | Support roles touching cloud systems | Support engineer who can troubleshoot user issues and operate in AWS/cloud environments. |
 | `sales` | Sales | `kevin-mok-resume-sales.pdf` | Customer-facing sales and support operations | Revenue-aware operator with negotiation, dispute handling, and measurable marketplace outcomes. |
 | `call-centre` | Call Centre | `kevin-mok-resume-call-centre.pdf` | High-volume call/chat/email support | Call centre candidate with de-escalation, SLA awareness, queue handling, and clear customer communication. |
 
 ## Notes
 
-- Default variant in the app is `aws-web-dev` (best broad fit for web dev + devops/cloud + general SWE targeting).
+- Default variant in the app is `web-dev` (default recruiter-facing web application focus).
 - Recruiter one-liner (HR-safe, short format):
   `Ex-Cloud Engineer Intern @ Red Hat. Full-stack + cloud engineer (TypeScript/React, AWS/Kubernetes). Linux/FOSS advocate. CS @ UofT.`
 - `sales` and `call-centre` share similar support language but differ in emphasis:

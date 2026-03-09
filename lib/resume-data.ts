@@ -61,6 +61,7 @@ export type ResumeVariantId =
   | 'aws-python'
   | 'web-dev-django'
   | 'it-support'
+  | 'it-support-sql'
   | 'it-support-aws'
   | 'sales'
   | 'call-centre';
@@ -349,7 +350,7 @@ const digitalMarketplaceExperience: WorkExperience = {
   bullets: [
     '<strong>Built and scaled a peer-to-peer digital goods business</strong>, generating <strong>$50,000+ in gross merchandise value (GMV)</strong>.',
     '<strong>Managed escrow for transactions over $5,000</strong>, earning <strong>1000+ verified customer vouches</strong> with a <strong>0% unresolved dispute rate</strong>.',
-    '<strong>Ran end-to-end marketplace operations</strong>, including pricing and payment risk controls, <strong>reducing fulfillment latency by 30%</strong> through the automation of rapid digital delivery systems.',
+    '<strong>Ran end-to-end marketplace operations</strong>, including pricing and payment risk controls, <strong>reducing fulfillment latency by 50%</strong> through the automation of rapid digital delivery systems.',
     '<strong>Increased profit margins by 25%</strong> through fair-value pricing and product bundles that filtered low-intent leads.',
     '<strong>Implemented middleman verification checks</strong>, reducing fraud exposure and bringing <strong>chargeback risk close to zero</strong>.',
     '<strong>Standardized P&amp;L tracking</strong> and payment records, <strong>achieving 100% data reconciliation</strong> between fulfillment logs and bank statements.',
@@ -519,7 +520,7 @@ const defaultSectionTitles: ResumeSectionTitles = {
   education: 'Education',
 };
 
-export const DEFAULT_RESUME_VARIANT_ID: ResumeVariantId = 'aws-web-dev';
+export const DEFAULT_RESUME_VARIANT_ID: ResumeVariantId = 'web-dev';
 
 export const resumeVariants: ResumeVariantDefinition[] = [
   {
@@ -845,17 +846,18 @@ export const resumeVariants: ResumeVariantDefinition[] = [
       projects: [
         {
           ...awsServerProject,
-          bullets: [awsServerProject.bullets[3], awsServerProject.bullets[4]],
+          bullets: [awsServerProject.bullets[0]]
         },
       ],
       experience: [
         {
           ...redHatSupportExperience,
           bullets: [
-            redHatSupportExperience.bullets[0],
-            redHatSupportExperience.bullets[2],
-            redHatSupportExperience.bullets[3],
+            redHatSupportExperience.bullets[1],
             redHatSupportExperience.bullets[4],
+            redHatSupportExperience.bullets[3],
+            redHatSupportExperience.bullets[2],
+            redHatSupportExperience.bullets[0],
           ],
         },
         {
@@ -863,6 +865,69 @@ export const resumeVariants: ResumeVariantDefinition[] = [
           bullets: [
             digitalMarketplaceExperience.bullets[1],
             digitalMarketplaceExperience.bullets[2],
+          ],
+        },
+      ],
+      skills: [],
+      education: [educationSupport],
+    },
+  },
+  {
+    id: 'it-support-sql',
+    label: 'IT Support + SQL',
+    fileName: 'kevin-mok-resume-it-support-sql.pdf',
+    sectionTitles: {
+      ...defaultSectionTitles,
+      projects: 'Technical Support Projects',
+      experience: 'Support Work Experience',
+    },
+    skillsHtmlLines: [
+      '<strong>IT Support Skills:</strong> Tier 1/2 Troubleshooting, Incident Response, Jira, Log Analysis, Root Cause Investigation',
+      '<strong>Customer Support:</strong> Cross-team Collaboration, Communication, User Training, Documentation Updates',
+      '<strong>Programming Languages:</strong> Python, Go, JavaScript, TypeScript',
+      '<strong>Cloud + Web:</strong> PostgreSQL, Linux, AWS, React, Django',
+    ],
+    skillsLines: [
+      'IT Support Skills: Tier 1/2 Troubleshooting, Incident Response, Jira, Log Analysis, Root Cause Investigation',
+      'Customer Support: Cross-team Collaboration, Communication, User Training, Documentation Updates',
+      'Programming Languages: Python, Go, JavaScript, TypeScript',
+      'Cloud + Web: PostgreSQL, Linux, AWS, React, Django',
+    ],
+    resume: {
+      contact: sharedContact,
+      projects: [
+        {
+          ...spotifyVisualizedProject,
+          languages: ['Python', 'PostgreSQL'],
+          bullets: [
+            spotifyVisualizedProject.bullets[0],
+            spotifyVisualizedProject.bullets[3],
+            spotifyVisualizedProject.bullets[6],
+            spotifyVisualizedProject.bullets[9],
+          ],
+        },
+        {
+          ...raritySurfProject,
+          languages: ['Python', 'PostgreSQL'],
+          bullets: [
+            raritySurfProject.bullets[4],
+            raritySurfProject.bullets[9],
+            raritySurfProject.bullets[0],
+            raritySurfProject.bullets[8],
+          ],
+        },
+      ],
+      experience: [
+        {
+          ...redHatSupportExperience,
+          languages: ['Ticketing/Triage', 'Knowledge Base Writing'],
+          bullets: [
+            redHatSupportExperience.bullets[1],
+            redHatSupportExperience.bullets[4],
+            redHatSupportExperience.bullets[3],
+            redHatSupportExperience.bullets[2],
+            redHatSupportExperience.bullets[0],
+            redHatSupportExperience.bullets[5],
           ],
         },
       ],
@@ -1027,6 +1092,7 @@ const expectedRedHatSectionByVariant: Record<ResumeVariantId, RedHatSection> = {
   'aws-python': 'cloud',
   'web-dev-django': 'cloud',
   'it-support': 'support',
+  'it-support-sql': 'support',
   'it-support-aws': 'support',
   sales: 'support',
   'call-centre': 'support',
@@ -1113,6 +1179,7 @@ export const orderedResumeVariantIds: ResumeVariantId[] = [
   'aws-web-dev',
   'aws-python',
   'it-support',
+  'it-support-sql',
   'it-support-aws',
   'sales',
   'call-centre',

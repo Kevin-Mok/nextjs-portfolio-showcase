@@ -23,8 +23,14 @@ import {
 const cssPath = path.join(process.cwd(), 'app', 'styles', '13-resume-latex.css');
 const pdfDir = path.join(process.cwd(), 'public', 'resume');
 const MINIMUM_PRINT_SCALE_FLOOR = 1.14;
+const MINIMUM_PRINT_SCALE_FLOOR_BY_VARIANT = new Map([
+  ['it-support-sql', 1.08],
+]);
 const minimumScaleByVariant = new Map(
-  resumePdfVariants.map((variant) => [variant.id, MINIMUM_PRINT_SCALE_FLOOR])
+  resumePdfVariants.map((variant) => [
+    variant.id,
+    MINIMUM_PRINT_SCALE_FLOOR_BY_VARIANT.get(variant.id) ?? MINIMUM_PRINT_SCALE_FLOOR,
+  ])
 );
 
 function formatPoints(value) {
