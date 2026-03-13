@@ -144,6 +144,22 @@ const NeofetchTile: React.FC<NeofetchTileProps> = ({ isBlurred = false, layout =
               </div>
             )}
 
+            {/* Upwork */}
+            {system.upwork && (
+              <div>
+                <span className={`font-bold transition-all duration-300`} style={{ color: isBlurred ? 'rgba(var(--theme-primary-rgb), 0.6)' : 'var(--theme-primary)' }}>{system.upwork.platform}</span>:{' '}
+                <a
+                  href={system.upwork.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:underline transition-colors duration-200 cursor-pointer"
+                  style={{ color: 'var(--accent-color)', pointerEvents: 'auto' }}
+                >
+                  {system.upwork.username}
+                </a>
+              </div>
+            )}
+
             {/* Email */}
             <div>
               <span className={`font-bold transition-all duration-300`} style={{ color: isBlurred ? 'rgba(var(--theme-primary-rgb), 0.6)' : 'var(--theme-primary)' }}>Email</span>:{' '}

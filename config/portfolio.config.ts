@@ -11,7 +11,7 @@ export const portfolioConfig: PortfolioConfig = {
   personal: {
     name: process.env.NEXT_PUBLIC_NAME || "Your Name",
     username: process.env.NEXT_PUBLIC_USERNAME || "username",
-    greeting: process.env.NEXT_PUBLIC_GREETING || "Hi, I'm [Your Name]",
+    greeting: process.env.NEXT_PUBLIC_GREETING || "Hi, I'm Kevin Mok — Full-Stack Engineer Open to Work",
     title: process.env.NEXT_PUBLIC_TITLE || "Your Professional Title",
     subtitle: process.env.NEXT_PUBLIC_SUBTITLE || "A brief description of what you do",
     email: process.env.NEXT_PUBLIC_EMAIL || "your.email@example.com",
@@ -34,7 +34,7 @@ export const portfolioConfig: PortfolioConfig = {
     bio: {
       // Structured bio for parallax sections (minimal version)
       intro: process.env.NEXT_PUBLIC_BIO_INTRO ||
-        "Brief introduction about yourself and what you do.",
+        "Full-stack engineer open to work. I build frontend-heavy full-stack products that launch fast, load fast, and stay reliable in production with TypeScript, React, Next.js, Node.js, and cloud infrastructure. Check out my resume on this site or hire me on Upwork.",
 
       leadership: process.env.NEXT_PUBLIC_BIO_LEADERSHIP ||
         "Your professional background and expertise. Highlight key accomplishments and areas of focus.",
@@ -45,7 +45,7 @@ export const portfolioConfig: PortfolioConfig = {
 
       // Legacy fields for compatibility
       short: process.env.NEXT_PUBLIC_BIO_SHORT ||
-        "A concise professional bio that describes your role, expertise, and what makes your work unique.",
+        "Full-stack engineer open to work. I build frontend-heavy full-stack products that launch fast, load fast, and stay reliable in production with TypeScript, React, Next.js, Node.js, and cloud infrastructure. Check out my resume on this site or hire me on Upwork.",
 
       long: process.env.NEXT_PUBLIC_BIO_LONG ||
         "A more detailed bio that provides context about your professional journey, key projects, and the impact of your work.",
@@ -112,6 +112,11 @@ export const portfolioConfig: PortfolioConfig = {
       platform: "LinkedIn",
       username: process.env.NEXT_PUBLIC_LINKEDIN_HANDLE || "Your Name",
       url: process.env.NEXT_PUBLIC_LINKEDIN_URL || "https://linkedin.com/in/yourprofile"
+    },
+    upwork: {
+      platform: "Upwork",
+      username: process.env.NEXT_PUBLIC_UPWORK_HANDLE || "kevinmok",
+      url: process.env.NEXT_PUBLIC_UPWORK_URL || "https://www.upwork.com/freelancers/kevinmok"
     },
     youtube: {
       platform: "YouTube",

@@ -1,7 +1,8 @@
 'use client';
 
 import React from 'react';
-import { usePersonalInfo } from '@/lib/config';
+import Link from 'next/link';
+import { usePersonalInfo, useSystemInfo } from '@/lib/config';
 import { AboutTechGrid } from '../about/AboutTechGrid';
 import { ProfilePhoto } from '@/components/ui/ProfilePhoto';
 
@@ -11,6 +12,7 @@ import { ProfilePhoto } from '@/components/ui/ProfilePhoto';
  */
 const AboutContentComponent: React.FC = () => {
   const personal = usePersonalInfo();
+  const system = useSystemInfo();
 
   return (
     <div>
@@ -62,6 +64,44 @@ const AboutContentComponent: React.FC = () => {
             {personal.bio.intro}
           </p>
         )}
+
+        <div
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: '12px',
+            marginBottom: '16px'
+          }}
+        >
+          <Link
+            href="/resume"
+            className="hover:underline"
+            style={{
+              color: 'var(--accent-color)',
+              fontWeight: 600,
+              textDecoration: 'none',
+              alignSelf: 'center'
+            }}
+          >
+            View Resume
+          </Link>
+
+          {system.upwork && (
+            <a
+              href={system.upwork.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:underline"
+              style={{
+                color: 'var(--theme-text-dimmed)',
+                textDecoration: 'none',
+                alignSelf: 'center'
+              }}
+            >
+              Upwork
+            </a>
+          )}
+        </div>
 
         {/* Experience */}
         {personal.bio.experience && (

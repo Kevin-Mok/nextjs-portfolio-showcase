@@ -100,11 +100,16 @@ Create `.env.local` from template and configure:
 | `NEXT_PUBLIC_CDN_URL` | Optional | Cloudflare R2 CDN URL (e.g., `https://cdn.kmok.ai`) |
 | `NEXT_PUBLIC_NAME` | Recommended | Your full name |
 | `NEXT_PUBLIC_TITLE` | Recommended | Your professional title |
+| `NEXT_PUBLIC_BIO_INTRO` | Recommended | Homepage lead copy that search snippets may reuse |
+| `NEXT_PUBLIC_SEO_TITLE` | Recommended | Site or homepage SEO title |
+| `NEXT_PUBLIC_SEO_DESCRIPTION` | Recommended | Site or homepage SEO description |
 | `NEXT_PUBLIC_GITHUB_URL` | Recommended | GitHub profile URL |
 | `NEXT_PUBLIC_LINKEDIN_URL` | Optional | LinkedIn profile URL |
 | `NEXT_PUBLIC_TWITTER_URL` | Optional | Twitter/X profile URL |
+| `NEXT_PUBLIC_UPWORK_URL` | Optional | Upwork profile URL used by homepage CTAs and neofetch |
+| `NEXT_PUBLIC_UPWORK_HANDLE` | Optional | Upwork handle shown in neofetch |
 
-See [.env.example](.env.example) for complete list of 49 customizable variables.
+See [.env.example](.env.example) for the complete environment variable list.
 
 ### CDN Configuration (Optional)
 

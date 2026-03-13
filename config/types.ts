@@ -122,6 +122,7 @@ export interface SystemInfo {
   github?: SocialInfo;
   twitter?: SocialInfo;
   linkedin?: SocialInfo;
+  upwork?: SocialInfo;
   youtube?: SocialInfo;
   instagram?: SocialInfo;
   tiktok?: SocialInfo;
