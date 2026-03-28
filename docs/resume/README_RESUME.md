@@ -16,7 +16,8 @@ The resume feature is fully implemented and live on your portfolio site.
 - `docs/resume/` contains the core long-lived resume documentation.
 - `docs/resume/workflows/` contains workflow helpers (checklists and source tracking files).
 - `docs/resume/reviews/` contains point-in-time review snapshots/changelogs.
-- `docs/prompts/` contains AI prompt workflows referenced by the resume docs.
+- `docs/prompts/` contains long-lived AI prompt workflows referenced by the resume docs.
+- `prompts/` contains repo-level prompt artifacts created directly for prompt requests.
 
 ### Choose your documentation based on your needs:
 
@@ -158,6 +159,20 @@ This file covers:
 
 ---
 
+#### 🚀 **I want ChatGPT to add a Warp-specific agentic/devtools resume variant**
+→ Read: **[warp-agentic-resume-variant.md](../../prompts/warp-agentic-resume-variant.md)**
+
+This file covers:
+- Exact attachment checklist across `portfolio-site`, `red-hat-contributions`, `linux-config`, `Documents/chess`, and `openclaw`
+- Fixed `warp-agentic` variant naming and PDF wiring rules
+- Strict project/date/bullet selection guidance for Warp’s devtools + agentic platform angle
+- Required PDF generation and one-page validation commands
+
+**Reading time**: 4-6 minutes
+**For**: AI-assisted addition of a company-specific Warp resume variant
+
+---
+
 ## Common Tasks Quick Links
 
 ### Update Your Resume
@@ -269,6 +284,23 @@ docs/prompts/RESUME_VARIANT_RESTRUCTURE_PROMPT.md
 
 **Prompt guide**: [RESUME_VARIANT_RESTRUCTURE_PROMPT.md](../prompts/RESUME_VARIANT_RESTRUCTURE_PROMPT.md)
 
+### Add a Warp-Specific Resume Variant (ChatGPT)
+1. Open the prompt guide:
+
+```text
+prompts/warp-agentic-resume-variant.md
+```
+
+2. Attach the listed `portfolio-site`, Red Hat, `linux-config`, chess, and `openclaw` source files
+3. Run the prompt and review unified diffs for the new `warp-agentic` variant wiring
+4. Run validation commands and resolve all failures before merging:
+   - `npm run build`
+   - `npm run calibrate:resume-layout`
+   - `npm run verify:resume-layout`
+   - `npm run validate-resume-pdfs`
+
+**Prompt guide**: [warp-agentic-resume-variant.md](../../prompts/warp-agentic-resume-variant.md)
+
 ## File Locations Reference
 
 | Purpose | Location |
@@ -282,6 +314,7 @@ docs/prompts/RESUME_VARIANT_RESTRUCTURE_PROMPT.md
 | Navigation | `contexts/FocusContext.tsx`, `components/tiles/NavigationTile.tsx`, `components/layout/Polybar.tsx` |
 | Workflow helper docs | `docs/resume/workflows/` |
 | Review snapshots | `docs/resume/reviews/` |
+| Prompt workflows | `docs/prompts/`, `prompts/` |
 
 ## Architecture at a Glance
 
@@ -346,7 +379,7 @@ Browser renders professional LaTeX-styled resume
 - 40+ PDF variants in `public/resume/`
 - 4 contact icons in `public/icons/resume/`
 
-### Documentation (9 files)
+### Documentation (10 files)
 - This README
 - reference/RESUME_FEATURE_OVERVIEW.md
 - RESUME_ARCHITECTURE.md
@@ -355,6 +388,7 @@ Browser renders professional LaTeX-styled resume
 - reference/RESUME_FILE_STRUCTURE.md
 - RESUME_VARIANT_POSITIONING.md
 - docs/prompts/README_RESUME_POINTS_PROMPT.md
+- ../../prompts/warp-agentic-resume-variant.md
 - resume-generation-spec.md
 
 ## Next Steps
@@ -437,6 +471,10 @@ README_RESUME.md (you are here)
 │   ├── Attachment checklist
 │   ├── Copy/paste ChatGPT prompt
 │   └── Claim/length quality guardrails
+├── ../../prompts/warp-agentic-resume-variant.md
+│   ├── Attachment checklist
+│   ├── Copy/paste ChatGPT prompt
+│   └── Warp-specific variant wiring and validation rules
 └── resume-generation-spec.md
     ├── Layout baseline/tolerances
     ├── Verification rules
