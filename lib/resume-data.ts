@@ -55,6 +55,7 @@ export interface ResumeSectionTitles {
 
 export type ResumeVariantId =
   | 'web-dev'
+  | 'warp-agentic'
   | 'aws'
   | 'python'
   | 'aws-web-dev'
@@ -79,6 +80,7 @@ export interface ResumeVariantDefinition {
   skillsHtmlLines?: string[];
   skillsLines?: string[];
   references?: string;
+  primarySectionOrder?: 'experience-first' | 'projects-first';
 }
 
 const sharedContact: ContactInfo = {
@@ -297,6 +299,39 @@ const nomarStocksProject: ResumeProject = {
     '<strong>Optimized SEO for 9 targeted keywords</strong> using the Next.js API, resulting in a search-optimized architecture that scores <strong>100/100 for SEO best practices</strong> on web audits.',
     '<strong>Developed a mobile-first responsive architecture</strong> using Tailwind CSS, ensuring <strong>100% cross-device compatibility</strong> and <strong>reducing layout shifting to near-zero</strong>.',
     '<strong>Refined website first impressions</strong> by designing a smooth content-reveal experience, contributing to a <strong>20% reduction in bounce rates</strong> and significantly higher user engagement.'
+  ],
+};
+
+const linuxConfigProject: ResumeProject = {
+  name: 'AI CLI Dotfiles',
+  url: 'https://github.com/Kevin-Mok/ai-cli-dotfiles',
+  languages: ['Linux', 'Bash', 'Codex', 'Graphiti'],
+  date: 'Mar 2026 — Present',
+  bullets: [
+    '<strong>Built</strong> a terminal-first <strong>Codex</strong> environment that version-controls <strong>AGENTS</strong>, runtime defaults, reusable skills, and <strong>ExecPlans</strong> around a <strong>4-stage</strong> workflow for reproducible agent sessions.',
+    '<strong>Integrated</strong> local <strong>Graphiti</strong> memory over <strong>stdio</strong> with <strong>Neo4j</strong> on <strong>localhost:7687</strong>, replacing a conflicting port-8000 HTTP path and documenting validation with <strong>codex mcp</strong> commands.',
+  ],
+};
+
+const chessCliProject: ResumeProject = {
+  name: 'Local Chess Forensics CLI',
+  url: 'https://github.com/Kevin-Mok/ai-chess-coach-llm',
+  languages: ['Python', 'Stockfish', 'Lc0', 'Ollama'],
+  date: 'Mar 2026 — Present',
+  bullets: [
+    '<strong>Built</strong> a local-first <strong>CLI</strong> that turns PGNs into reproducible Markdown reports with <strong>Stockfish</strong> + <strong>Lc0</strong> forensic analysis, optional <strong>Ollama</strong>/<strong>llama-cli</strong> rewrites, and deterministic fallback text.',
+    '<strong>Integrated</strong> <strong>Stockfish</strong>, <strong>Lc0</strong>, <strong>Ollama</strong>, and <strong>llama-cli</strong> behind explicit CLI flags and auto-detection so the rewrite path can fall back to deterministic forensic text when local AI backends are unavailable.',
+  ],
+};
+
+const openclawJobOpsProject: ResumeProject = {
+  name: 'OpenClaw Job Ops',
+  url: 'https://github.com/Kevin-Mok/openclaw',
+  languages: ['TypeScript', 'OpenClaw', 'SQLite', 'Discord'],
+  date: 'Mar 2026 — Present',
+  bullets: [
+    '<strong>Built</strong> a fixture-first <strong>OpenClaw</strong> job-ops POC that ingests alerts, dedupes leads, applies Toronto location policy for a <strong>Toronto-area postal code</strong>, routes jobs to the right resume variant, and drafts packets without inventing experience.',
+    '<strong>Implemented</strong> browser-backed <strong>Indeed</strong> and <strong>X/Twitter</strong> syncs with persistent profiles, SQLite audit records, Cloudflare/sign-in handling, and Discord-delivery suppression while keeping <strong>SQLite</strong> as canonical state.',
   ],
 };
 
@@ -580,6 +615,48 @@ export const resumeVariants: ResumeVariantDefinition[] = [
         ],
       },
     ],
+  },
+  {
+    id: 'warp-agentic',
+    label: 'Warp / Agentic Devtools',
+    fileName: 'kevin-mok-resume-warp-agentic.pdf',
+    primarySectionOrder: 'projects-first',
+    summary:
+      'Product-minded engineer building terminal-native agent workflows, local AI tooling, and reproducible Linux/devtools automation for developer users. Strong in debugging, documentation, and human-in-the-loop systems that stay inspectable under real-world constraints.',
+    sectionTitles: {
+      ...defaultSectionTitles,
+      projects: 'Agentic / Devtools Projects',
+      experience: 'Work Experience',
+    },
+    skillsHtmlLines: [
+      '<strong>Core:</strong> Linux, Bash/Shell, Git, TypeScript/Node.js, Python, Go',
+      '<strong>Devtools:</strong> Docker, Kubernetes, Codex, OpenClaw, Graphiti, MCP, SQLite, Neo4j',
+      '<strong>AI / Execution:</strong> Ollama, llama-cli, Stockfish, Lc0, documentation, debugging, human-in-the-loop automation',
+    ],
+    skillsLines: [
+      'Core: Linux, Bash/Shell, Git, TypeScript/Node.js, Python, Go',
+      'Devtools: Docker, Kubernetes, Codex, OpenClaw, Graphiti, MCP, SQLite, Neo4j',
+      'AI / Execution: Ollama, llama-cli, Stockfish, Lc0, documentation, debugging, human-in-the-loop automation',
+    ],
+    resume: {
+      contact: sharedContact,
+      projects: [linuxConfigProject, openclawJobOpsProject, chessCliProject],
+      experience: [
+        {
+          ...redHatCloudExperience,
+          languages: ['Kubernetes', 'Go', 'Helm'],
+          bullets: [
+            '<strong>Delivered 50+ merged PRs</strong> across <strong>10</strong> open-source repos, contributing <strong>7,000+ lines</strong> to Kubernetes operators, runtimes, container images, and deployment tooling in Red Hat&apos;s Kogito ecosystem.',
+            '<strong>Founded</strong> <strong>kogito-helm-charts</strong> in <strong>4 PRs</strong> (<strong>+2,144 lines</strong>), creating a GitOps-friendly deployment path with Prometheus, PostgreSQL, and Kafka support.',
+            '<strong>Shipped 20 PRs</strong> to <strong>kogito-operator</strong>, including a <strong>724-line</strong> startup-probe feature and a fix for deployments that were constantly updating.',
+            '<strong>Authored</strong> a <strong>472-line</strong> onboarding guide for new Kogito operator contributors, standardizing local setup, debugging, and PR workflow expectations.',
+            '<strong>Refactored</strong> Quarkus and Spring Boot environment handling in a <strong>587-line</strong> operator change set, reducing framework-specific deployment friction across deployments.',
+          ],
+        },
+      ],
+      skills: [],
+      education: [educationDefault],
+    },
   },
   {
     id: 'aws',
@@ -1086,6 +1163,7 @@ type RedHatSection = 'cloud' | 'support';
 
 const expectedRedHatSectionByVariant: Record<ResumeVariantId, RedHatSection> = {
   'web-dev': 'cloud',
+  'warp-agentic': 'cloud',
   aws: 'cloud',
   python: 'cloud',
   'aws-web-dev': 'cloud',
@@ -1173,6 +1251,7 @@ export const resumeVariantByFileName: Record<string, ResumeVariantDefinition> =
 
 export const orderedResumeVariantIds: ResumeVariantId[] = [
   'web-dev',
+  'warp-agentic',
   'web-dev-django',
   'python',
   'aws',

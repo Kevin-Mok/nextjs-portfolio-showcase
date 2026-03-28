@@ -11,8 +11,10 @@ import {
 import {
   expectedWhitespacePointsForPageHeight,
   loadResumeLayoutBaseline,
+  resolveWhitespaceCapsForVariant,
 } from './lib/resume-layout-baseline.mjs';
 import { resumePdfVariants } from './lib/resume-pdf-variants.mjs';
+import { evaluateWhitespaceConstraints } from './lib/resume-layout-constraints.mjs';
 import {
   CALIBRATION_LIMITS,
   computeNextSettings,
@@ -41,18 +43,20 @@ function formatNumber(value) {
   return Number(value.toFixed(3)).toString();
 }
 
-function measureCurrentWhitespaceCaps(baseline) {
+function measureCurrentWhitespaceCaps(baseline, variantId) {
   if (!baseline.whitespaceCaps) {
     throw new Error(
       `Missing enforcement whitespace caps in ${baseline.baselinePath}. Set enforcement.topWhitespaceMinPts and enforcement.bottomWhitespaceMinPts.`
     );
   }
 
+  const caps = resolveWhitespaceCapsForVariant(variantId, baseline);
   return {
-    sourceVariantId: 'enforcement-values',
+    sourceVariantId: variantId ?? 'enforcement-values',
     sourceFileName: path.basename(baseline.baselinePath),
-    topMinPts: baseline.whitespaceCaps.topMinPts,
-    bottomMinPts: baseline.whitespaceCaps.bottomMinPts,
+    topMinPts: caps.topMinPts,
+    bottomMinPts: caps.bottomMinPts,
+    bottomMaxPts: caps.bottomMaxPts,
     pageHeightPts: null,
   };
 }
@@ -342,27 +346,33 @@ function measureVariant(variant, baselineRatio, tolerancePts, whitespaceCaps) {
     baselineRatio
   );
   const deltaPts = layout.bottomWhitespacePts - expectedPts;
-  const topDeficitPts = whitespaceCaps.topMinPts - layout.topWhitespacePts;
-  const bottomDeficitPts = whitespaceCaps.bottomMinPts - layout.bottomWhitespacePts;
+  const constraints = evaluateWhitespaceConstraints({
+    topWhitespacePts: layout.topWhitespacePts,
+    bottomWhitespacePts: layout.bottomWhitespacePts,
+    tolerancePts,
+    caps: {
+      topMinPts: whitespaceCaps.topMinPts,
+      bottomMinPts: whitespaceCaps.bottomMinPts,
+      bottomMaxPts: whitespaceCaps.bottomMaxPts,
+    },
+  });
 
-  let solverDeltaPts = -bottomDeficitPts;
-  let primaryFailure = 'none';
+  let solverDeltaPts = -constraints.bottomDeficitPts;
+  let primaryFailure = constraints.primaryFailure;
   if (pdfInfo.pages !== 1) {
     primaryFailure = 'page-overflow';
-  } else if (bottomDeficitPts > tolerancePts && bottomDeficitPts >= topDeficitPts) {
-    primaryFailure = 'bottom-underflow';
+  } else if (constraints.primaryFailure === 'bottom-underflow') {
     // Negative solver delta nudges top-offset upward (more bottom whitespace).
-    solverDeltaPts = -bottomDeficitPts;
-  } else if (topDeficitPts > tolerancePts) {
-    primaryFailure = 'top-underflow';
+    solverDeltaPts = -constraints.bottomDeficitPts;
+  } else if (constraints.primaryFailure === 'top-underflow') {
     // Positive solver delta nudges top-offset downward (more top whitespace).
-    solverDeltaPts = topDeficitPts;
+    solverDeltaPts = constraints.topDeficitPts;
+  } else if (constraints.primaryFailure === 'bottom-overflow') {
+    // Positive solver delta nudges top-offset downward (less bottom whitespace).
+    solverDeltaPts = constraints.bottomOverflowPts;
   }
 
-  const pass =
-    pdfInfo.pages === 1 &&
-    topDeficitPts <= tolerancePts &&
-    bottomDeficitPts <= tolerancePts;
+  const pass = pdfInfo.pages === 1 && constraints.pass;
 
   return {
     id: variant.id,
@@ -375,9 +385,11 @@ function measureVariant(variant, baselineRatio, tolerancePts, whitespaceCaps) {
     baselineDeltaPts: deltaPts,
     topExpectedPts: whitespaceCaps.topMinPts,
     topActualPts: layout.topWhitespacePts,
-    topDeficitPts,
+    topDeficitPts: constraints.topDeficitPts,
     bottomExpectedPts: whitespaceCaps.bottomMinPts,
-    bottomDeficitPts,
+    bottomDeficitPts: constraints.bottomDeficitPts,
+    bottomMaxPts: constraints.bottomMaxPts,
+    bottomOverflowPts: constraints.bottomOverflowPts,
     primaryFailure,
     pageHeightPts: layout.pageHeightPts,
     pass,
@@ -393,9 +405,15 @@ function printIterationReport(iteration, results) {
         result.topActualPts
       )}/${formatPoints(result.topExpectedPts)} (delta=${formatPoints(
         result.topDeficitPts
-      )}) bottom=${formatPoints(result.actualPts)}/${formatPoints(
-        result.bottomExpectedPts
-      )} (delta=${formatPoints(result.bottomDeficitPts)}) solverDelta=${formatPoints(
+      )}) bottom=${formatPoints(result.actualPts)}/${
+        result.bottomExpectedPts === null
+          ? `max ${formatPoints(result.bottomMaxPts)}`
+          : formatPoints(result.bottomExpectedPts)
+      } (delta=${formatPoints(result.bottomDeficitPts)}${
+        result.bottomMaxPts === null
+          ? ''
+          : `, overflow=${formatPoints(result.bottomOverflowPts)}/${formatPoints(result.bottomMaxPts)}`
+      }) solverDelta=${formatPoints(
         result.deltaPts
       )} reason=${result.primaryFailure}`
     );
@@ -488,9 +506,13 @@ function classifyBoundedFailure(variantId, measurement, settings, tolerancePts) 
     return {
       code: 'content-too-short-at-ceiling',
       explanation:
-        'Top whitespace remains below the minimum cap while scale/leading/top-offset are at maximum allowed density.',
+        measurement.primaryFailure === 'bottom-overflow'
+          ? 'Bottom whitespace remains above the maximum cap while scale/leading/top-offset are already at maximum allowed density.'
+          : 'Top whitespace remains below the minimum cap while scale/leading/top-offset are at maximum allowed density.',
       recommendation:
-        'Relax the top whitespace minimum, or explicitly raise max density bounds in the solver.',
+        measurement.primaryFailure === 'bottom-overflow'
+          ? 'Add more content to the variant or explicitly raise max density bounds in the solver.'
+          : 'Relax the top whitespace minimum, or explicitly raise max density bounds in the solver.',
     };
   }
 
@@ -678,16 +700,31 @@ for (let iteration = 1; iteration <= options.maxIterations; iteration += 1) {
   }
 
   const cssBefore = readFileSync(cssPath, 'utf8');
-  activeWhitespaceCaps = measureCurrentWhitespaceCaps(baseline);
-  console.log(
-    `[calibrate] Active whitespace minima from ${activeWhitespaceCaps.sourceFileName}: top>=${formatPoints(
-      activeWhitespaceCaps.topMinPts
-    )} bottom>=${formatPoints(activeWhitespaceCaps.bottomMinPts)} (-${formatPoints(
-      baseline.tolerancePts
-    )} tolerance)`
+  const whitespaceCapsByVariant = new Map(
+    targetVariants.map((variant) => [variant.id, measureCurrentWhitespaceCaps(baseline, variant.id)])
   );
+  for (const variant of targetVariants) {
+    activeWhitespaceCaps = whitespaceCapsByVariant.get(variant.id);
+    if (!activeWhitespaceCaps) {
+      continue;
+    }
+    console.log(
+      `[calibrate] ${variant.id} constraints from ${activeWhitespaceCaps.sourceFileName}: top>=${formatPoints(
+        activeWhitespaceCaps.topMinPts
+      )} ${
+        activeWhitespaceCaps.bottomMinPts === null
+          ? `bottom<=${formatPoints(activeWhitespaceCaps.bottomMaxPts)}`
+          : `bottom>=${formatPoints(activeWhitespaceCaps.bottomMinPts)}`
+      } (-${formatPoints(baseline.tolerancePts)} tolerance)`
+    );
+  }
   const measurements = targetVariants.map((variant) =>
-    measureVariant(variant, baseline.ratio, baseline.tolerancePts, activeWhitespaceCaps)
+    measureVariant(
+      variant,
+      baseline.ratio,
+      baseline.tolerancePts,
+      whitespaceCapsByVariant.get(variant.id)
+    )
   );
   const settingsByVariant = new Map();
   for (const result of measurements) {
@@ -714,7 +751,7 @@ for (let iteration = 1; iteration <= options.maxIterations; iteration += 1) {
   const failing = measurements.filter((result) => !result.pass);
   if (failing.length === 0) {
     converged = true;
-    console.log('\n[calibrate] All variants meet page-count + top/bottom whitespace minimum constraints.');
+    console.log('\n[calibrate] All variants meet page-count + configured top/bottom whitespace constraints.');
     break;
   }
 

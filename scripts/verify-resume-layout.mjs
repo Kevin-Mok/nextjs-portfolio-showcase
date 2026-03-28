@@ -9,8 +9,10 @@ import {
 } from './lib/pdf-layout-metrics.mjs';
 import {
   loadResumeLayoutBaseline,
+  resolveWhitespaceCapsForVariant,
 } from './lib/resume-layout-baseline.mjs';
 import { resumePdfVariants } from './lib/resume-pdf-variants.mjs';
+import { evaluateWhitespaceConstraints } from './lib/resume-layout-constraints.mjs';
 
 function parseArgs(argv) {
   let pdfPath = null;
@@ -54,11 +56,17 @@ function parseArgs(argv) {
 
 function resolveTargets(pdfPathArg) {
   if (pdfPathArg) {
-    return [path.resolve(pdfPathArg)];
+    const resolvedPath = path.resolve(pdfPathArg);
+    const variant =
+      resumePdfVariants.find((item) => item.fileName === path.basename(resolvedPath)) ?? null;
+    return [{ variant, pdfPath: resolvedPath }];
   }
 
   const outputDir = path.join(process.cwd(), 'public', 'resume');
-  return resumePdfVariants.map((variant) => path.join(outputDir, variant.fileName));
+  return resumePdfVariants.map((variant) => ({
+    variant,
+    pdfPath: path.join(outputDir, variant.fileName),
+  }));
 }
 
 function formatRatio(ratio) {
@@ -86,14 +94,12 @@ if (!baseline.whitespaceCaps) {
   process.exit(1);
 }
 const capMetrics = {
-  topWhitespacePts: baseline.whitespaceCaps.topMinPts,
-  bottomWhitespacePts: baseline.whitespaceCaps.bottomMinPts,
   sourceLabel: `${path.basename(baseline.baselinePath)}#enforcement`,
 };
 const results = [];
 let hasFailures = false;
 
-for (const pdfPath of targets) {
+for (const { pdfPath, variant } of targets) {
   if (!existsSync(pdfPath)) {
     hasFailures = true;
     results.push({ pdfPath, status: 'fail', error: 'PDF file does not exist' });
@@ -102,24 +108,30 @@ for (const pdfPath of targets) {
 
   try {
     const metrics = measureBottomWhitespace(pdfPath);
-    const topDeficitPts = capMetrics.topWhitespacePts - metrics.topWhitespacePts;
-    const bottomDeficitPts = capMetrics.bottomWhitespacePts - metrics.bottomWhitespacePts;
-    const withinTolerance =
-      topDeficitPts <= baseline.tolerancePts && bottomDeficitPts <= baseline.tolerancePts;
+    const caps = resolveWhitespaceCapsForVariant(variant?.id ?? null, baseline);
+    const constraints = evaluateWhitespaceConstraints({
+      topWhitespacePts: metrics.topWhitespacePts,
+      bottomWhitespacePts: metrics.bottomWhitespacePts,
+      tolerancePts: baseline.tolerancePts,
+      caps,
+    });
 
-    if (!withinTolerance) {
+    if (!constraints.pass) {
       hasFailures = true;
     }
 
     results.push({
       pdfPath,
-      status: withinTolerance ? 'ok' : 'fail',
-      expectedTopWhitespacePts: capMetrics.topWhitespacePts,
-      expectedBottomWhitespacePts: capMetrics.bottomWhitespacePts,
+      status: constraints.pass ? 'ok' : 'fail',
+      primaryFailure: constraints.primaryFailure,
+      expectedTopWhitespacePts: caps.topMinPts,
+      expectedBottomWhitespacePts: caps.bottomMinPts,
+      expectedBottomWhitespaceMaxPts: constraints.bottomMaxPts,
       actualTopWhitespacePts: metrics.topWhitespacePts,
       actualBottomWhitespacePts: metrics.bottomWhitespacePts,
-      topDeficitPts,
-      bottomDeficitPts,
+      topDeficitPts: constraints.topDeficitPts,
+      bottomDeficitPts: constraints.bottomDeficitPts,
+      bottomOverflowPts: constraints.bottomOverflowPts,
       tolerancePts: baseline.tolerancePts,
       pageHeightPts: metrics.pageHeightPts,
       topWhitespaceRatio: metrics.topWhitespaceRatio,
@@ -140,8 +152,8 @@ if (args.outputJson) {
         baselineRatio: baseline.ratio,
         tolerancePts: baseline.tolerancePts,
         capSource: capMetrics.sourceLabel,
-        topWhitespaceMinPts: capMetrics.topWhitespacePts,
-        bottomWhitespaceMinPts: capMetrics.bottomWhitespacePts,
+        topWhitespaceMinPts: baseline.whitespaceCaps.topMinPts,
+        bottomWhitespaceMinPts: baseline.whitespaceCaps.bottomMinPts,
         count: results.length,
         results,
       },
@@ -151,21 +163,33 @@ if (args.outputJson) {
   );
 } else {
   console.log(
-    `Whitespace minima source: ${capMetrics.sourceLabel} (top=${formatPoints(
-      capMetrics.topWhitespacePts
-    )}, bottom=${formatPoints(capMetrics.bottomWhitespacePts)}, tolerance=${formatPoints(
+    `Whitespace constraints source: ${capMetrics.sourceLabel} (top=${formatPoints(
+      baseline.whitespaceCaps.topMinPts
+    )}, defaultBottomMin=${formatPoints(baseline.whitespaceCaps.bottomMinPts)}, tolerance=${formatPoints(
       baseline.tolerancePts
     )})`
   );
 
   for (const result of results) {
     if (result.status === 'ok') {
+      const bottomTargetText =
+        result.expectedBottomWhitespacePts === null ||
+        result.expectedBottomWhitespacePts === undefined
+          ? `max=${formatPoints(result.expectedBottomWhitespaceMaxPts)}`
+          : `min=${formatPoints(result.expectedBottomWhitespacePts)}${
+              result.expectedBottomWhitespaceMaxPts === null ||
+              result.expectedBottomWhitespaceMaxPts === undefined
+                ? ''
+                : ` max=${formatPoints(result.expectedBottomWhitespaceMaxPts)}`
+            }`;
       console.log(
-        `OK ${path.basename(result.pdfPath)} expected=${formatPoints(
-          result.expectedBottomWhitespacePts
-        )} actual=${formatPoints(result.actualBottomWhitespacePts)} bottomDeficit=${formatPoints(
+        `OK ${path.basename(result.pdfPath)} actual=${formatPoints(
+          result.actualBottomWhitespacePts
+        )} ${bottomTargetText} bottomDeficit=${formatPoints(
           result.bottomDeficitPts
-        )} topDeficit=${formatPoints(result.topDeficitPts)} ratio=${formatRatio(
+        )} bottomOverflow=${formatPoints(result.bottomOverflowPts)} topDeficit=${formatPoints(
+          result.topDeficitPts
+        )} ratio=${formatRatio(
           result.bottomWhitespaceRatio
         )}`
       );
@@ -179,15 +203,32 @@ if (args.outputJson) {
     }
 
     const topMinAllowedPts = result.expectedTopWhitespacePts - result.tolerancePts;
-    const bottomMinAllowedPts = result.expectedBottomWhitespacePts - result.tolerancePts;
+    const bottomMinAllowedPts =
+      result.expectedBottomWhitespacePts === null ||
+      result.expectedBottomWhitespacePts === undefined
+        ? null
+        : result.expectedBottomWhitespacePts - result.tolerancePts;
+    const bottomMaxAllowedPts =
+      result.expectedBottomWhitespaceMaxPts === null ||
+      result.expectedBottomWhitespaceMaxPts === undefined
+        ? null
+        : result.expectedBottomWhitespaceMaxPts + result.tolerancePts;
+    const bottomBoundsText =
+      bottomMinAllowedPts === null
+        ? `max ${formatPoints(bottomMaxAllowedPts)}`
+        : bottomMaxAllowedPts === null
+          ? `min ${formatPoints(bottomMinAllowedPts)}`
+          : `min ${formatPoints(bottomMinAllowedPts)}, max ${formatPoints(bottomMaxAllowedPts)}`;
     console.error(
-      `  - whitespace below minimum: top actual ${formatPoints(
+      `  - whitespace outside bounds: top actual ${formatPoints(
         result.actualTopWhitespacePts
       )} (min ${formatPoints(topMinAllowedPts)}), bottom actual ${formatPoints(
         result.actualBottomWhitespacePts
-      )} (min ${formatPoints(bottomMinAllowedPts)}), topDeficit ${formatPoints(
+      )} (${bottomBoundsText}), topDeficit ${formatPoints(
         result.topDeficitPts
-      )}, bottomDeficit ${formatPoints(result.bottomDeficitPts)}`
+      )}, bottomDeficit ${formatPoints(result.bottomDeficitPts)}, bottomOverflow ${formatPoints(
+        result.bottomOverflowPts
+      )}`
     );
   }
 }
@@ -197,5 +238,5 @@ if (hasFailures) {
 }
 
 if (!args.outputJson) {
-  console.log('All checked resume PDFs meet top/bottom whitespace minimums.');
+  console.log('All checked resume PDFs meet configured top/bottom whitespace bounds.');
 }

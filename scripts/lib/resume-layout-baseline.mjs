@@ -1,5 +1,6 @@
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
+import { resumePdfVariants } from './resume-pdf-variants.mjs';
 
 const baselinePath = path.join(process.cwd(), 'docs', 'resume', 'resume-layout-baseline.json');
 
@@ -87,4 +88,31 @@ export function loadResumeLayoutBaseline() {
 
 export function expectedWhitespacePointsForPageHeight(pageHeightPts, baselineRatio) {
   return baselineRatio * pageHeightPts;
+}
+
+export function resolveWhitespaceCapsForVariant(variantId, baseline = loadResumeLayoutBaseline()) {
+  if (!baseline.whitespaceCaps) {
+    throw new Error(
+      `Missing enforcement whitespace caps in ${baseline.baselinePath}. Set enforcement.topWhitespaceMinPts and enforcement.bottomWhitespaceMinPts.`
+    );
+  }
+
+  const variant = resumePdfVariants.find((candidate) => candidate.id === variantId) ?? null;
+  const bottomWhitespaceMinPts = Number.isFinite(variant?.bottomWhitespaceMinPts)
+    ? variant.bottomWhitespaceMinPts
+    : null;
+  const bottomWhitespaceMaxPts = Number.isFinite(variant?.bottomWhitespaceMaxPts)
+    ? variant.bottomWhitespaceMaxPts
+    : null;
+
+  return {
+    topMinPts: baseline.whitespaceCaps.topMinPts,
+    bottomMinPts:
+      bottomWhitespaceMinPts !== null
+        ? bottomWhitespaceMinPts
+        : bottomWhitespaceMaxPts === null
+          ? baseline.whitespaceCaps.bottomMinPts
+          : null,
+    bottomMaxPts: bottomWhitespaceMaxPts,
+  };
 }

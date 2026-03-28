@@ -130,6 +130,7 @@ Resume constraints:
 
 - Keep Computer Modern-style presentation.
 - Maintain white background and black text for print-ready output.
+- Do not mix software engineering/cloud experience and technical support experience in the same resume variant; pick one track or the other for each variant.
 - If content changes, verify `/resume` and homepage resume tile rendering.
 - Regenerate `public/resume/*.pdf` variants when resume copy changes.
 - After resume content changes, recalibrate per-variant page fill (`--resume-print-scale` in `app/styles/13-resume-latex.css`) so each variant fills one US Letter page.

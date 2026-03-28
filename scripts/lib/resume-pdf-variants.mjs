@@ -5,6 +5,12 @@
  */
 export const resumePdfVariants = [
   { id: 'web-dev', fileName: 'kevin-mok-resume-web-dev.pdf' },
+  {
+    id: 'warp-agentic',
+    fileName: 'kevin-mok-resume-warp-agentic.pdf',
+    bottomWhitespaceMinPts: 0,
+    bottomWhitespaceMaxPts: 15,
+  },
   { id: 'web-dev-django', fileName: 'kevin-mok-resume-web-dev-django.pdf' },
   { id: 'python', fileName: 'kevin-mok-resume-python.pdf' },
   { id: 'aws', fileName: 'kevin-mok-resume-aws.pdf' },

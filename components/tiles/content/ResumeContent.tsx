@@ -52,6 +52,25 @@ const ResumeContentComponent: React.FC<ResumeContentProps> = ({
     () => new Set(selectedVariant.skillsBold ?? resume.skills),
     [selectedVariant.skillsBold, resume.skills]
   );
+  const experienceSection = (
+    <ResumeSection key="experience" title={sectionTitles.experience}>
+      {resume.experience.map((work) => (
+        <WorkEntry key={`${work.company}-${work.date}-${work.title}`} work={work} />
+      ))}
+    </ResumeSection>
+  );
+  const projectsSection =
+    resume.projects.length > 0 ? (
+      <ResumeSection key="projects" title={sectionTitles.projects}>
+        {resume.projects.map((project) => (
+          <ProjectEntry key={`${project.name}-${project.date}`} project={project} />
+        ))}
+      </ResumeSection>
+    ) : null;
+  const primarySections =
+    selectedVariant.primarySectionOrder === 'projects-first'
+      ? [projectsSection, experienceSection]
+      : [experienceSection, projectsSection];
 
   return (
     <div
@@ -82,19 +101,7 @@ const ResumeContentComponent: React.FC<ResumeContentProps> = ({
         </div>
       </div>
 
-      <ResumeSection title={sectionTitles.experience}>
-        {resume.experience.map((work) => (
-          <WorkEntry key={`${work.company}-${work.date}-${work.title}`} work={work} />
-        ))}
-      </ResumeSection>
-
-      {resume.projects.length > 0 ? (
-        <ResumeSection title={sectionTitles.projects}>
-          {resume.projects.map((project) => (
-            <ProjectEntry key={`${project.name}-${project.date}`} project={project} />
-          ))}
-        </ResumeSection>
-      ) : null}
+      {primarySections}
 
       {selectedVariant.otherExperience && selectedVariant.otherExperience.length > 0 ? (
         <ResumeSection title={otherExperienceTitle}>

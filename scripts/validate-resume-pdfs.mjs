@@ -14,8 +14,10 @@ import {
 } from './lib/pdf-layout-metrics.mjs';
 import {
   loadResumeLayoutBaseline,
+  resolveWhitespaceCapsForVariant,
 } from './lib/resume-layout-baseline.mjs';
-import { resumePdfFileNames } from './lib/resume-pdf-variants.mjs';
+import { evaluateWhitespaceConstraints } from './lib/resume-layout-constraints.mjs';
+import { resumePdfFileNames, resumePdfVariants } from './lib/resume-pdf-variants.mjs';
 
 const allowedFontFamilies = new Set(['CMUSerif']);
 const expectedBoldFamilyPrefix = 'CMUSerif';
@@ -57,8 +59,6 @@ try {
   }
 
   capMetrics = {
-    topWhitespacePts: baseline.whitespaceCaps.topMinPts,
-    bottomWhitespacePts: baseline.whitespaceCaps.bottomMinPts,
     sourceLabel: `${path.basename(baseline.baselinePath)}#enforcement`,
   };
 } catch (error) {
@@ -72,6 +72,7 @@ let hasFailures = false;
 for (const fileName of resumePdfFileNames) {
   const pdfPath = path.join(pdfDir, fileName);
   const failures = [];
+  const variant = resumePdfVariants.find((item) => item.fileName === fileName);
 
   try {
     const pdfInfo = parsePdfInfo(runPdfCommand('pdfinfo', [pdfPath]));
@@ -98,23 +99,36 @@ for (const fileName of resumePdfFileNames) {
       failures.push('missing bold font face (expected CMUSerif-Bold subset)');
     }
 
-    const topDeficitPts = capMetrics.topWhitespacePts - whitespace.topWhitespacePts;
-    const bottomDeficitPts = capMetrics.bottomWhitespacePts - whitespace.bottomWhitespacePts;
-    const failsWhitespaceMinimums =
-      topDeficitPts > baseline.tolerancePts || bottomDeficitPts > baseline.tolerancePts;
-    if (failsWhitespaceMinimums) {
-      const topMinAllowedPts = capMetrics.topWhitespacePts - baseline.tolerancePts;
-      const bottomMinAllowedPts = capMetrics.bottomWhitespacePts - baseline.tolerancePts;
+    const constraints = evaluateWhitespaceConstraints({
+      topWhitespacePts: whitespace.topWhitespacePts,
+      bottomWhitespacePts: whitespace.bottomWhitespacePts,
+      tolerancePts: baseline.tolerancePts,
+      caps: resolveWhitespaceCapsForVariant(variant?.id ?? null, baseline),
+    });
+    if (!constraints.pass) {
+      const topMinAllowedPts = baseline.whitespaceCaps.topMinPts - baseline.tolerancePts;
+      const bottomMinAllowedPts =
+        constraints.bottomMinPts === null ? null : constraints.bottomMinPts - baseline.tolerancePts;
+      const bottomMaxAllowedPts =
+        constraints.bottomMaxPts === null ? null : constraints.bottomMaxPts + baseline.tolerancePts;
       failures.push(
         [
-          `whitespace below minimum`,
+          `whitespace outside bounds`,
           `expectedTopMin=${formatPoints(topMinAllowedPts)}`,
-          `expectedBottomMin=${formatPoints(bottomMinAllowedPts)}`,
+          bottomMinAllowedPts === null
+            ? null
+            : `expectedBottomMin=${formatPoints(bottomMinAllowedPts)}`,
+          bottomMaxAllowedPts === null
+            ? null
+            : `expectedBottomMax=${formatPoints(bottomMaxAllowedPts)}`,
           `actualTop=${formatPoints(whitespace.topWhitespacePts)}`,
           `actualBottom=${formatPoints(whitespace.bottomWhitespacePts)}`,
-          `topDeficit=${formatPoints(topDeficitPts)}`,
-          `bottomDeficit=${formatPoints(bottomDeficitPts)}`,
-        ].join(' ')
+          `topDeficit=${formatPoints(constraints.topDeficitPts)}`,
+          `bottomDeficit=${formatPoints(constraints.bottomDeficitPts)}`,
+          `bottomOverflow=${formatPoints(constraints.bottomOverflowPts)}`,
+        ]
+          .filter(Boolean)
+          .join(' ')
       );
     }
 
@@ -135,10 +149,17 @@ for (const fileName of resumePdfFileNames) {
         `fonts=${[...fontFamilies].join(',')}`,
         `topWhitespace=${formatPoints(whitespace.topWhitespacePts)}`,
         `bottomWhitespace=${formatPoints(whitespace.bottomWhitespacePts)}`,
-        `targetTopMin=${formatPoints(capMetrics.topWhitespacePts)}`,
-        `targetBottomMin=${formatPoints(capMetrics.bottomWhitespacePts)}`,
+        `targetTopMin=${formatPoints(baseline.whitespaceCaps.topMinPts)}`,
+        Number.isFinite(variant?.bottomWhitespaceMaxPts)
+          ? null
+          : `targetBottomMin=${formatPoints(baseline.whitespaceCaps.bottomMinPts)}`,
+        Number.isFinite(variant?.bottomWhitespaceMaxPts)
+          ? `targetBottomMax=${formatPoints(variant.bottomWhitespaceMaxPts)}`
+          : null,
         `ratio=${formatPercent(whitespace.bottomWhitespaceRatio)}`,
-      ].join(' ')
+      ]
+        .filter(Boolean)
+        .join(' ')
     );
   } catch (error) {
     hasFailures = true;
@@ -155,9 +176,13 @@ if (hasFailures) {
 console.log(
   [
     'All resume PDFs passed validation.',
-    `Whitespace minima source: ${capMetrics.sourceLabel}`,
-    `Top min=${formatPoints(capMetrics.topWhitespacePts)} Bottom min=${formatPoints(
-      capMetrics.bottomWhitespacePts
-    )} tolerance=${formatPoints(baseline.tolerancePts)}`,
+    `Whitespace constraints source: ${capMetrics.sourceLabel}`,
+    `Top min=${formatPoints(baseline.whitespaceCaps.topMinPts)} Default bottom min=${formatPoints(
+      baseline.whitespaceCaps.bottomMinPts
+    )} tolerance=${formatPoints(baseline.tolerancePts)}${
+      resumePdfVariants.some((variant) => Number.isFinite(variant.bottomWhitespaceMaxPts))
+        ? ' variant-specific bottom ceilings enforced'
+        : ''
+    }`,
   ].join(' ')
 );

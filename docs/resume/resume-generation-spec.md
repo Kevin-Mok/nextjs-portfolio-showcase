@@ -14,6 +14,7 @@ This document defines the required layout rules for all generated resume PDFs.
    - Enforcement source is the generated `public/resume/kevin-mok-resume-web-dev.pdf`.
    - Allowed minimum-side tolerance: `-1.0pt` below the `web-dev` top/bottom whitespace floors.
    - Denser layouts that go below those floors are not allowed.
+   - Specific variants may also enforce a tighter bottom-whitespace ceiling when a company-specific resume should fill the page more aggressively.
 2. Spacing and legibility:
    - Keep resume content dense but readable.
    - Tighten section and bullet spacing to reduce excess vertical gaps.
@@ -82,10 +83,12 @@ npm run build
 ## Enforcement Notes
 
 - Verification scope is the canonical variant list in `scripts/lib/resume-pdf-variants.mjs`.
-- Layout gate mode across calibration/verification/validation is now `min-whitespace-top-bottom`:
-  - pass if `pageCount === 1` and:
+- Layout gate mode across calibration/verification/validation uses the baseline top/bottom minimums plus any per-variant bottom ceiling declared in `scripts/lib/resume-pdf-variants.mjs`:
+  - pass if `pageCount === 1`
   - `actualTopWhitespacePts >= webDevTopWhitespacePts - tolerancePts`
-  - `actualBottomWhitespacePts >= webDevBottomWhitespacePts - tolerancePts`
+  - `actualBottomWhitespacePts >= webDevBottomWhitespacePts - tolerancePts` unless a variant-specific ceiling replaces the default bottom minimum
+  - `actualBottomWhitespacePts <= variantBottomWhitespaceMaxPts + tolerancePts` when a variant-specific ceiling is present
+- `warp-agentic` currently enforces `bottomWhitespace <= 15pt` so the PDF cannot pass with a large blank block under the education section.
 - Per-variant print controls live in `app/styles/13-resume-latex.css`:
   - Calibration now tracks best-so-far candidates and restores best-known settings if max iterations are reached without convergence.
   - `--resume-print-scale`
