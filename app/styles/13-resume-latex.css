@@ -419,9 +419,9 @@
 }
 
 .resume-variant-ai-agentic {
-  --resume-print-scale: 1.17;
+  --resume-print-scale: 1.161;
   --resume-print-leading: 0.9;
-  --resume-print-top-offset: 8.8pt;
+  --resume-print-top-offset: 12.431pt;
   --resume-print-min-section-gap: 0.36rem;
   --resume-print-min-entry-gap: 0.24rem;
   --resume-print-min-subtitle-gap: 0.08rem;

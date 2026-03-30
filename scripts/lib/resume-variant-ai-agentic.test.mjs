@@ -64,8 +64,8 @@ test('ai-agentic variant keeps the required project and experience structure', (
     'expected one project to cover the openclaw job-ops workflow'
   );
   assert.ok(
-    projectText.some((text) => /(Toronto location policy|location policy)/i.test(text)),
-    'expected the OpenClaw bullet to describe generic location-policy routing'
+    projectText.some((text) => /(Toronto location policy|location policy|location rules)/i.test(text)),
+    'expected the OpenClaw bullet to describe generic location-based routing'
   );
   assert.ok(
     projectText.every((text) => !/M1E 4V4/i.test(text)),
@@ -84,6 +84,7 @@ test('ai-agentic variant keeps the required project and experience structure', (
   const totalExperienceBullets = experiences.reduce((sum, entry) => sum + entry.bullets.length, 0);
   assert.equal(totalExperienceBullets, 5, `expected 5 total Red Hat bullets, got ${totalExperienceBullets}`);
   const experienceText = experiences[0].bullets.join(' ');
+  assert.match(experienceText, /\bGo\b|GoLang|Golang/i);
   assert.match(experienceText, /500\+ line|onboarding/i);
   assert.match(experienceText, /Quarkus|Spring Boot|startup probes|Helm charts/i);
 });

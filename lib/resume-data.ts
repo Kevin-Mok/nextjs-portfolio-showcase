@@ -309,7 +309,7 @@ const linuxConfigProject: ResumeProject = {
   date: 'Mar 2026 — Present',
   bullets: [
     'Built a terminal-first <strong>AI agent-agnostic environment</strong> that version-controls <strong>AGENTS files</strong>, runtime defaults, <strong>reusable skills</strong>, and execution plans that <strong>break work into smaller tasks</strong> in a <strong>simultaneous multi-agent workflow</strong> for reproducible productive agentic engineering sessions.',
-    'Integrated <strong>local Graphiti memory using MCP</strong>, <strong>giving agents persistent memory</strong> and relevant-fact retrieval so they reread less chat history and <strong>send fewer input tokens per prompt</strong>, thus increasing output speed and productivity.',
+    'Integrated <strong>local Graphiti memory using MCP</strong>, <strong>giving agents persistent memory</strong> and relevant-fact retrieval so they reread less chat history and <strong>send fewer input tokens per prompt</strong>, thus <strong>increasing output speed and productivity</strong>.',
   ],
 };
 
@@ -329,7 +329,7 @@ const openclawJobOpsProject: ResumeProject = {
   languages: ['TypeScript', 'OpenClaw', 'SQLite', 'Discord'],
   date: 'Mar 2026 — Present',
   bullets: [
-    'Built a <strong>OpenClaw</strong> job-ops that ingests alerts, dedupes leads, applies Toronto location policy, routes jobs to the right resume variant, and drafts packets without inventing experience.',
+    'Built a <strong>TypeScript</strong> workflow around <strong>OpenClaw</strong> that ingests alerts, deduplicates leads, applies location rules, routes jobs to the right resume variant, and drafts application packets without fabricating experience.',
     'Implemented <strong>browser-backed Indeed listings</strong> and <strong>X/Twitter post</strong> syncs with persistent profiles, SQLite audit records, Cloudflare/sign-in handling, and Discord-delivery while keeping SQLite as canonical state.',
   ],
 };
@@ -628,9 +628,9 @@ export const resumeVariants: ResumeVariantDefinition[] = [
       experience: 'Work Experience',
     },
     skillsHtmlLines: [
-      '<strong>Core:</strong> Linux, Bash/Shell, Git, TypeScript/Node.js, Python, Go',
-      '<strong>AI / Execution:</strong> Claude Code, Codex, Ollama, llama-cli, Stockfish, Lc0, documentation, debugging, human-in-the-loop automation, MCP',
-      '<strong>Devtools:</strong> Docker, Kubernetes,  OpenClaw, SQLite, Neo4j',
+      '<strong>Core:</strong> Go, Linux, Bash/Shell, TypeScript/Node.js, Python, Git',
+      '<strong>AI / Execution:</strong> Claude Code, Codex, OpenClaw, MCP, Ollama, llama-cli, Stockfish, Lc0, documentation, debugging, human-in-the-loop automation',
+      '<strong>Devtools:</strong> Docker, Kubernetes, SQLite, Neo4j',
     ],
     skillsLines: [
       'Core: Linux, Bash/Shell, Git, TypeScript/Node.js, Python, Go',
@@ -645,10 +645,10 @@ export const resumeVariants: ResumeVariantDefinition[] = [
           ...redHatCloudExperience,
           languages: ['Kubernetes', 'Go', 'Helm'],
           bullets: [
-            '<strong>Delivered 50+ merged PRs</strong> across <strong>10</strong> open-source repos, contributing <strong>7,000+ lines</strong> to Kubernetes operators, runtimes, container images, and deployment tooling in Red Hat&apos;s Kogito ecosystem.',
+            '<strong>Delivered 50+ merged PRs</strong> across <strong>10</strong> open-source repos, using <strong>Go</strong> and Java to ship <strong>7,000+ lines</strong> across Kubernetes operators, runtimes, container images, and deployment tooling in Red Hat&apos;s Kogito ecosystem.',
             '<strong>Founded</strong> <strong>Helm charts</strong>, creating a GitOps-friendly deployment path with Prometheus, PostgreSQL, and Kafka support.',
             '<strong>Architected startup probes</strong> within the Kubernetes Operator, <strong>reducing container restart failures by 50%</strong> for complex Java-based microservices.',
-            '<strong>Refactored</strong> Quarkus and Spring Boot environment handling in a major operator change set, reducing framework-specific deployment friction across deployments.',
+            '<strong>Refactored</strong> Quarkus and Spring Boot environment handling in a major operator change set, reducing framework-specific configuration friction for operator-managed services.',
             '<strong>Authored</strong> a <strong>500+ line</strong> onboarding guide for new Kogito operator contributors, standardizing local setup, debugging, and PR workflow expectations.',
           ],
         },
