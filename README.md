@@ -19,6 +19,22 @@ A production-ready developer portfolio built with Next.js 15, featuring a tiled 
 
 ---
 
+## Why This Repo Stands Out
+
+- It is not a generic portfolio shell. The site ships a Hyprland-inspired desktop UI, a distinct mobile layout, MDX-backed writing, and a resume system with automated PDF generation and layout validation in one repo.
+- The repo shows product thinking, not just frontend polish: contact delivery, spam protection, CDN-aware media handling, typed content pipelines, and recruiter-ready resume workflows are all versioned together.
+- The build pipeline proves more than “it compiles.” `npm run build` regenerates resume PDFs, and the resume verification scripts enforce page count, whitespace, and font consistency so role-specific resume links do not quietly drift.
+
+## 🏗️ Tech Stack And Why Chosen
+
+- **Next.js 15 + React 19**: one deployable surface for the app shell, API routes, blog, project pages, and resume route without splitting the portfolio into multiple services.
+- **TypeScript strict mode**: keeps config, MDX-derived content, and resume data changes from silently drifting.
+- **Content Collections + MDX**: stores blog and project content in tracked files with build-time validation instead of a separate CMS.
+- **Tailwind CSS v4 + modular CSS + Framer Motion**: mixes fast utility styling with deliberately scoped stylesheet modules and animation control for the window-manager aesthetic.
+- **Resend + Zod**: gives the contact flow production email delivery plus schema-validated input handling.
+- **Local resume PDF tooling**: the repo generates and validates 12 resume variants with local Computer Modern fonts, layout baselines, and deterministic PDF checks.
+- **Optional Cloudflare R2**: keeps the project deployable without CDN setup while still supporting a faster production media path.
+
 ## ✨ Features
 
 - **Desktop Layout**: 6-tile Hyprland-inspired layout (Neofetch, Navigation, Content, Theme Preset, Accent Color, Background)
@@ -69,6 +85,8 @@ npm run start      # Start production server
 npm run typecheck  # TypeScript validation
 npm run lint       # Code linting
 ```
+
+These top-level npm entrypoints are normally run exactly as shown here; the repo does not rely on extra README-level flags for day-to-day use.
 
 ### Resume PDF Workflow
 
@@ -178,7 +196,7 @@ Add environment variables via Vercel dashboard → Settings → Environment Vari
 
 ---
 
-## 🏗️ Tech Stack
+## 🧱 Implementation Snapshot
 
 **Framework**: Next.js 15.5.4 with App Router and Turbopack
 **Language**: TypeScript 5.0 (strict mode)

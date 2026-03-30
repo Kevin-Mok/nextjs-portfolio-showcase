@@ -13,7 +13,7 @@ Canonical active variants: 12
 | Variant ID | Dropdown Label | PDF File | Purpose | What it is trying to sell |
 |---|---|---|---|---|
 | `web-dev` | Web Development | `kevin-mok-resume-web-dev.pdf` | Frontend/full-stack applications | TypeScript/React/Node developer who can build and ship web features quickly. |
-| `warp-agentic` | Warp / Agentic Devtools | `kevin-mok-resume-warp-agentic.pdf` | Devtools and agentic engineering roles | Product-minded engineer for terminal-native workflows, Linux/devtools automation, local AI tooling, and human-in-the-loop agent systems. |
+| `ai-agentic` | AI/Agentic | `kevin-mok-resume-ai-agentic.pdf` | Devtools and agentic engineering roles | Product-minded engineer for terminal-native workflows, Linux/devtools automation, local AI tooling, and human-in-the-loop agent systems. |
 | `aws` | AWS/Cloud | `kevin-mok-resume-aws.pdf` | Infrastructure and cloud operations | Cloud/platform engineer focused on AWS, Kubernetes, Terraform, uptime, and deployment reliability. |
 | `python` | Python | `kevin-mok-resume-python.pdf` | Python-centric backend work | Python/Django engineer with backend architecture and data-heavy app experience. |
 | `aws-web-dev` | AWS + Web Dev | `kevin-mok-resume-aws-web-dev.pdf` | Cross-functional cloud + web role | Engineer who bridges infrastructure ownership with web product delivery. |
@@ -28,7 +28,7 @@ Canonical active variants: 12
 ## Notes
 
 - Default variant in the app is `web-dev` (default recruiter-facing web application focus).
-- `warp-agentic` is a company-specific variant for Warp-style devtools/platform roles and should never replace `web-dev` as the default recruiter-facing option.
+- `ai-agentic` is the focused AI/agentic devtools/platform variant and should never replace `web-dev` as the default recruiter-facing option.
 - Recruiter one-liner (HR-safe, short format):
   `Ex-Cloud Engineer Intern @ Red Hat. Full-stack + cloud engineer (TypeScript/React, AWS/Kubernetes). Linux/FOSS advocate. CS @ UofT.`
 - `sales` and `call-centre` share similar support language but differ in emphasis:

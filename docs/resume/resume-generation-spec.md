@@ -88,7 +88,7 @@ npm run build
   - `actualTopWhitespacePts >= webDevTopWhitespacePts - tolerancePts`
   - `actualBottomWhitespacePts >= webDevBottomWhitespacePts - tolerancePts` unless a variant-specific ceiling replaces the default bottom minimum
   - `actualBottomWhitespacePts <= variantBottomWhitespaceMaxPts + tolerancePts` when a variant-specific ceiling is present
-- `warp-agentic` currently enforces `bottomWhitespace <= 15pt` so the PDF cannot pass with a large blank block under the education section.
+- `ai-agentic` currently enforces `bottomWhitespace <= 15pt` so the PDF cannot pass with a large blank block under the education section.
 - Per-variant print controls live in `app/styles/13-resume-latex.css`:
   - Calibration now tracks best-so-far candidates and restores best-known settings if max iterations are reached without convergence.
   - `--resume-print-scale`

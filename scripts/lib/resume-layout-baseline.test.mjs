@@ -6,13 +6,13 @@ import {
   resolveWhitespaceCapsForVariant,
 } from './resume-layout-baseline.mjs';
 
-test('warp-agentic enforces a bottom whitespace ceiling', () => {
+test('ai-agentic enforces a bottom whitespace ceiling', () => {
   const baseline = loadResumeLayoutBaseline();
 
-  const warpCaps = resolveWhitespaceCapsForVariant('warp-agentic', baseline);
-  assert.equal(warpCaps.topMinPts, baseline.whitespaceCaps.topMinPts);
-  assert.equal(warpCaps.bottomMinPts, 0);
-  assert.equal(warpCaps.bottomMaxPts, 15);
+  const aiAgenticCaps = resolveWhitespaceCapsForVariant('ai-agentic', baseline);
+  assert.equal(aiAgenticCaps.topMinPts, baseline.whitespaceCaps.topMinPts);
+  assert.equal(aiAgenticCaps.bottomMinPts, 0);
+  assert.equal(aiAgenticCaps.bottomMaxPts, 15);
 
   const webDevCaps = resolveWhitespaceCapsForVariant('web-dev', baseline);
   assert.equal(webDevCaps.topMinPts, baseline.whitespaceCaps.topMinPts);

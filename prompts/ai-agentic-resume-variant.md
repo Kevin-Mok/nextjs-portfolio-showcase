@@ -1,6 +1,6 @@
-# ChatGPT Prompt: Add a Warp Agentic Devtools Resume Variant
+# ChatGPT Prompt: Add an AI/Agentic Resume Variant
 
-Use this prompt when you want ChatGPT to add a first-class Warp-targeted resume variant inside `portfolio-site`, using only source-backed evidence from your existing resume data, Red Hat contributions, and the three project repos you want emphasized.
+Use this prompt when you want ChatGPT to add a first-class AI/agentic resume variant inside `portfolio-site`, using only source-backed evidence from your existing resume data, Red Hat contributions, and the three project repos you want emphasized.
 
 ## Attach These Files First
 
@@ -27,7 +27,7 @@ Optional if you want ChatGPT to refresh summary/index docs when they become stal
 ## Copy/Paste Prompt
 
 ```text
-You are adding a new Warp-tailored resume variant inside portfolio-site.
+You are adding a new AI/agentic resume variant inside portfolio-site.
 
 Attached files:
 - /home/kevin/coding/portfolio-site/lib/resume-data.ts
@@ -46,23 +46,23 @@ Attached files:
 - optional: /home/kevin/coding/portfolio-site/docs/resume/RESUME_DOCS_INDEX.md
 
 Goal:
-Add one first-class company-specific resume variant that sells me to Warp as a product-minded engineer for an agentic development platform: terminal-native, Linux/devtools-heavy, automation-oriented, documentation-strong, and comfortable building human-in-the-loop AI workflows.
+Add one first-class AI/agentic resume variant that sells me as a product-minded engineer for an agentic development platform: terminal-native, Linux/devtools-heavy, automation-oriented, documentation-strong, and comfortable building human-in-the-loop AI workflows.
 
 This should read like a devtools / agentic platform candidate, not a generic frontend SaaS candidate.
 
 New variant requirements (strict):
 1) Add exactly one new variant:
-   - id: `warp-agentic`
-   - label: `Warp / Agentic Devtools`
-   - fileName: `kevin-mok-resume-warp-agentic.pdf`
+   - id: `ai-agentic`
+   - label: `AI/Agentic`
+   - fileName: `kevin-mok-resume-ai-agentic.pdf`
 2) Keep all existing variant IDs and file names unchanged.
-3) Keep `web-dev` as the default recruiter-facing variant; do not reorder the app so `warp-agentic` becomes default.
+3) Keep `web-dev` as the default recruiter-facing variant; do not reorder the app so `ai-agentic` becomes default.
 4) Update any canonical active-variant docs or counts that become stale after adding this variant. At minimum, update `docs/resume/RESUME_VARIANT_POSITIONING.md`.
 
 Primary source policy (strict):
 1) Use `lib/resume-data.ts` as the source of truth for resume structure, contact info, education, existing formatting patterns, and any reused existing work/project bullets.
 2) Use `RED-HAT-CONTRIBUTIONS.md` as the authoritative source for Red Hat cloud/devtools/open-source contribution bullets and metrics.
-3) Use the three attached project repos as the authoritative source for the new Warp-facing project bullets:
+3) Use the three attached project repos as the authoritative source for the new AI/agentic project bullets:
    - `linux-config`
    - `Documents/chess`
    - `openclaw`
@@ -75,7 +75,7 @@ Fixed date defaults for the three project entries (strict):
 3) `openclaw` must use `Mar 2026 — Present`.
 
 Variant positioning rules:
-1) Optimize for Warp’s broad Software Engineer story with Implementation Engineer overlap:
+1) Optimize for a broad AI/agentic Software Engineer story with Implementation Engineer overlap:
    - agentic development workflows
    - terminal/CLI depth
    - Linux/shell fluency
@@ -171,7 +171,7 @@ Output requirements (strict):
 1) Return unified diffs only.
 2) Include diffs only for files you changed.
 3) Before diffs, include:
-   - the final project/experience selection summary for `warp-agentic`
+   - the final project/experience selection summary for `ai-agentic`
    - bullet counts by section
    - any claims you softened or omitted because the evidence was too weak or too dense for one page
 
@@ -182,8 +182,8 @@ Acceptance checks to run and report:
 - `npm run validate-resume-pdfs`
 
 Manual checks to run and report:
-- confirm `/resume?variant=warp-agentic` renders
-- confirm the PDF exists at `public/resume/kevin-mok-resume-warp-agentic.pdf`
+- confirm `/resume?variant=ai-agentic` renders
+- confirm the PDF exists at `public/resume/kevin-mok-resume-ai-agentic.pdf`
 - confirm the new variant stays on one US Letter page
 
 Failure handling:
@@ -192,7 +192,7 @@ If any validation step fails, update the diffs, rerun the full failing checks, a
 
 ## Validation Checklist
 
-- The prompt adds a new first-class `warp-agentic` variant instead of mutating an existing generic variant.
+- The prompt adds a new first-class `ai-agentic` variant instead of mutating an existing generic variant.
 - The prompt requires all 3 requested projects: `linux-config`, `Documents/chess`, and `openclaw`.
 - The prompt uses `RED-HAT-CONTRIBUTIONS.md` as the primary Red Hat cloud/devtools source and keeps support bullets secondary.
 - The prompt locks the project date defaults to `Mar 2026 — Present`.
@@ -201,4 +201,4 @@ If any validation step fails, update the diffs, rerun the full failing checks, a
 ## Notes
 
 - This workflow is for adding a new company-specific resume variant inside the existing `portfolio-site` resume system.
-- It intentionally favors Warp’s devtools / agentic platform story over a generic full-stack web story.
+- It intentionally favors an AI/agentic devtools platform story over a generic full-stack web story.

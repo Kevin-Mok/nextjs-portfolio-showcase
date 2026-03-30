@@ -236,15 +236,15 @@ This directory contains the core resume feature documentation. Related AI prompt
 
 ---
 
-### 🚀 prompts/warp-agentic-resume-variant.md
-**ChatGPT prompt for adding a Warp-specific agentic/devtools resume variant**
+### 🚀 prompts/ai-agentic-resume-variant.md
+**ChatGPT prompt for adding an AI/agentic devtools resume variant**
 
 - Attachment checklist spanning `portfolio-site`, Red Hat contributions, `linux-config`, chess, and `openclaw`
-- Fixed `warp-agentic` variant ID, label, and PDF file name
+- Fixed `ai-agentic` variant ID, label, and PDF file name
 - Strict rules for project selection, Red Hat evidence priority, and fixed `Mar 2026 — Present` project dates
 - Required resume validation commands and one-page PDF acceptance checks
 
-**Best for**: Adding a company-specific Warp resume variant to the checked-in resume system.
+**Best for**: Adding an AI/agentic resume variant to the checked-in resume system.
 
 ---
 
@@ -264,7 +264,7 @@ This directory contains the core resume feature documentation. Related AI prompt
 | Choose the right variant? | RESUME_VARIANT_POSITIONING.md |
 | Generate README bullets with AI? | docs/prompts/README_RESUME_POINTS_PROMPT.md |
 | Rebuild resume variants from README points with AI? | docs/prompts/RESUME_VARIANT_RESTRUCTURE_PROMPT.md |
-| Add a Warp-specific resume variant with AI? | prompts/warp-agentic-resume-variant.md |
+| Add an AI/Agentic resume variant with AI? | prompts/ai-agentic-resume-variant.md |
 
 ### Based on Your Role:
 
@@ -278,7 +278,7 @@ This directory contains the core resume feature documentation. Related AI prompt
 | Job applicant (targeting roles) | RESUME_VARIANT_POSITIONING.md |
 | AI-assisted documentation editor | docs/prompts/README_RESUME_POINTS_PROMPT.md |
 | AI-assisted resume restructuring | docs/prompts/RESUME_VARIANT_RESTRUCTURE_PROMPT.md |
-| AI-assisted company-specific variant author | prompts/warp-agentic-resume-variant.md |
+| AI-assisted company-specific variant author | prompts/ai-agentic-resume-variant.md |
 
 ## Documentation Statistics
 
@@ -367,8 +367,8 @@ README_RESUME.md
 │  └─ links to layout verification and calibration workflow
 ├─ docs/prompts/README_RESUME_POINTS_PROMPT.md
 │  └─ links to target project README attachment requirements
-└─ ../../prompts/warp-agentic-resume-variant.md
-   └─ links to Warp-specific source evidence and variant wiring rules
+└─ ../../prompts/ai-agentic-resume-variant.md
+   └─ links to AI/Agentic source evidence and variant wiring rules
 ```
 
 ## How to Use This Documentation
@@ -385,8 +385,8 @@ README_RESUME.md
 ### For AI-Assisted README Updates
 → Use **docs/prompts/README_RESUME_POINTS_PROMPT.md** to generate variant-aware resume bullets
 
-### For AI-Assisted Warp Variant Creation
-→ Use **prompts/warp-agentic-resume-variant.md** to add the `warp-agentic` company-specific variant safely
+### For AI-Assisted AI/Agentic Variant Creation
+→ Use **prompts/ai-agentic-resume-variant.md** to add the `ai-agentic` variant safely
 
 ### For Learning
 → Start with **README_RESUME.md**, then read **reference/RESUME_FEATURE_OVERVIEW.md**
@@ -441,7 +441,7 @@ When you update the resume, consider also updating:
 - RESUME_VARIANT_POSITIONING.md (if variants are added/removed/repositioned)
 - resume-generation-spec.md (if layout rules/tolerances change)
 - docs/prompts/README_RESUME_POINTS_PROMPT.md (if variants, repos, or claim policy changes)
-- ../../prompts/warp-agentic-resume-variant.md (if Warp-specific source evidence, naming, or validation rules change)
+- ../../prompts/ai-agentic-resume-variant.md (if AI/Agentic source evidence, naming, or validation rules change)
 
 ## Summary
 
@@ -455,7 +455,7 @@ This documentation package provides **complete coverage** of the resume feature:
 ✅ Which variant to send for which role
 ✅ How to enforce PDF layout standards
 ✅ How to generate AI-assisted README bullets safely
-✅ How to add a Warp-specific variant safely
+✅ How to add an AI/Agentic variant safely
 ✅ How it was migrated
 ✅ How to troubleshoot issues
 ✅ How to extend it
