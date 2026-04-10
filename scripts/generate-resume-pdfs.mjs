@@ -2,6 +2,7 @@
 
 import { spawn, spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
+import { existsSync } from 'node:fs';
 import { access, mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { resumePdfVariants } from './lib/resume-pdf-variants.mjs';
@@ -265,6 +266,26 @@ function buildResumeUrl(variantId) {
   return url.toString();
 }
 
+function resolveNextBinary() {
+  let currentDir = process.cwd();
+
+  while (true) {
+    const candidate = path.join(currentDir, 'node_modules', '.bin', 'next');
+    if (existsSync(candidate)) {
+      return candidate;
+    }
+
+    const parentDir = path.dirname(currentDir);
+    if (parentDir === currentDir) {
+      break;
+    }
+
+    currentDir = parentDir;
+  }
+
+  return 'next';
+}
+
 async function generateVariantPdf(variant, chromeBin) {
   const pdfPath = path.join(outputDir, variant.fileName);
   const url = buildResumeUrl(variant.id);
@@ -285,7 +306,7 @@ async function generateVariantPdf(variant, chromeBin) {
 }
 
 function startNextServer() {
-  const nextBin = path.join(process.cwd(), 'node_modules', '.bin', 'next');
+  const nextBin = resolveNextBinary();
   return spawn(nextBin, ['start', '-H', host, '-p', port], {
     stdio: ['ignore', 'pipe', 'pipe'],
   });
