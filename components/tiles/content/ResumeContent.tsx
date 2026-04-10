@@ -39,6 +39,8 @@ const ResumeContentComponent: React.FC<ResumeContentProps> = ({
         (selectedVariant.otherExperience && selectedVariant.otherExperience.length > 0
           ? 'Relevant Work Experience'
           : 'Work Experience'),
+      agenticEngineering:
+        selectedVariant.sectionTitles?.agenticEngineering ?? 'Agentic Engineering',
       skills: selectedVariant.sectionTitles?.skills ?? 'Skills',
       education: selectedVariant.sectionTitles?.education ?? 'Education',
     }),
@@ -67,10 +69,18 @@ const ResumeContentComponent: React.FC<ResumeContentProps> = ({
         ))}
       </ResumeSection>
     ) : null;
+  const agenticEngineeringSection =
+    selectedVariant.agenticEngineering && selectedVariant.agenticEngineering.length > 0 ? (
+      <ResumeSection key="agentic-engineering" title={sectionTitles.agenticEngineering}>
+        {selectedVariant.agenticEngineering.map((project) => (
+          <ProjectEntry key={`${project.name}-${project.date}`} project={project} />
+        ))}
+      </ResumeSection>
+    ) : null;
   const primarySections =
     selectedVariant.primarySectionOrder === 'projects-first'
-      ? [projectsSection, experienceSection]
-      : [experienceSection, projectsSection];
+      ? [projectsSection, agenticEngineeringSection, experienceSection]
+      : [experienceSection, projectsSection, agenticEngineeringSection];
 
   return (
     <div
@@ -79,6 +89,13 @@ const ResumeContentComponent: React.FC<ResumeContentProps> = ({
       } resume-variant-${selectedVariantId}`}
     >
       <ResumeHeader contact={resume.contact} />
+
+      {selectedVariant.showSummary && selectedVariant.summary ? (
+        <div className="resume-summary-block">
+          <h2 className="resume-section-title resume-summary-title">Intro</h2>
+          <p className="resume-summary">{selectedVariant.summary}</p>
+        </div>
+      ) : null}
 
       <div className="pdf-download-section">
         <a href={`/resume/${selectedVariant.fileName}`} download className="pdf-download-btn">

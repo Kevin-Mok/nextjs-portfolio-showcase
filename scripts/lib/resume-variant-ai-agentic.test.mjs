@@ -9,8 +9,8 @@ import {
 import { resumePdfVariants } from './resume-pdf-variants.mjs';
 
 test('ai-agentic variant is registered without changing the default resume', () => {
-  assert.equal(DEFAULT_RESUME_VARIANT_ID, 'web-dev');
-  assert.equal(orderedResumeVariantIds[0], 'web-dev');
+  assert.equal(DEFAULT_RESUME_VARIANT_ID, 'ai-web-dev');
+  assert.equal(orderedResumeVariantIds[0], 'ai-web-dev');
   assert.ok(
     orderedResumeVariantIds.includes('ai-agentic'),
     'expected orderedResumeVariantIds to include ai-agentic'
@@ -22,6 +22,7 @@ test('ai-agentic variant is registered without changing the default resume', () 
   assert.equal(aiAgenticVariant.fileName, 'kevin-mok-resume-ai-agentic.pdf');
   assert.equal(aiAgenticVariant.primarySectionOrder, 'projects-first');
   assert.equal(aiAgenticVariant.sectionTitles?.experience, 'Work Experience');
+  assert.equal(aiAgenticVariant.showSummary ?? false, false);
 
   const pdfVariant = resumePdfVariants.find((variant) => variant.id === 'ai-agentic');
   assert.deepEqual(pdfVariant, {

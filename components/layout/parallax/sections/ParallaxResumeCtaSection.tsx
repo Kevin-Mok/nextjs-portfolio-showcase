@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { getPortfolioConfig } from '@/config/portfolio.config';
+import { DEFAULT_RESUME_VARIANT_ID, resumeVariantById } from '@/lib/resume-data';
 
 /**
  * Resume CTA section for mobile parallax layout.
@@ -10,6 +11,7 @@ export const ParallaxResumeCtaSection: React.FC = () => {
   const upworkUrl =
     getPortfolioConfig().system.upwork?.url ||
     'https://www.upwork.com/freelancers/kevinmok';
+  const defaultResumePdfPath = `/resume/${resumeVariantById[DEFAULT_RESUME_VARIANT_ID].fileName}`;
 
   return (
     <div className="parallax-panel">
@@ -23,7 +25,7 @@ export const ParallaxResumeCtaSection: React.FC = () => {
           Open Resume
         </Link>
         <a
-          href="/resume/kevin-mok-resume-web-dev.pdf"
+          href={defaultResumePdfPath}
           target="_blank"
           rel="noopener noreferrer"
           className="parallax-cta-link"

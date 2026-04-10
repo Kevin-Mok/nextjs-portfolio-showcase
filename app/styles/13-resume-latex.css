@@ -288,6 +288,19 @@
   margin: 0;
 }
 
+.resume-summary-block {
+  margin-bottom: 0.3rem;
+}
+
+.resume-summary-title {
+  margin: 0 0 0.12rem 0;
+}
+
+.resume-summary {
+  margin-bottom: 0;
+  line-height: 1.18;
+}
+
 .resume-skills-lines {
   display: flex;
   flex-direction: column;
@@ -406,6 +419,37 @@
 }
 
 /* Per-variant print scaling tuned for one-page fill on US Letter */
+.resume-variant-ai-web-dev {
+  --resume-print-scale: 1.14;
+  --resume-print-leading: 0.9;
+  --resume-print-top-offset: -8pt;
+  --resume-print-min-section-gap: 0.36rem;
+  --resume-print-min-entry-gap: 0.24rem;
+  --resume-print-min-subtitle-gap: 0.08rem;
+  --resume-print-min-bullets-top-gap: 0.06rem;
+  --resume-print-min-bullet-gap: 0.06rem;
+  --resume-print-min-bullet-line-height: 1.18;
+}
+
+.resume-variant-ai-web-dev .resume-summary-block {
+  margin-bottom: 0.42rem;
+  padding-left: 0.56rem;
+  border-left: 3px solid #1e4fa3;
+}
+
+.resume-variant-ai-web-dev .resume-summary-title {
+  margin-bottom: 0.1rem;
+  color: #1e4fa3;
+  font-size: 1em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.resume-variant-ai-web-dev .resume-summary {
+  font-size: 1.04em;
+  line-height: 1.24;
+}
+
 .resume-variant-web-dev {
   --resume-print-scale: 1.14;
   --resume-print-leading: 0.9;

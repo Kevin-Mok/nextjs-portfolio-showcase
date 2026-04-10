@@ -56,7 +56,7 @@ New variant requirements (strict):
    - label: `AI/Agentic`
    - fileName: `kevin-mok-resume-ai-agentic.pdf`
 2) Keep all existing variant IDs and file names unchanged.
-3) Keep `web-dev` as the default recruiter-facing variant; do not reorder the app so `ai-agentic` becomes default.
+3) Keep the current recruiter-facing default variant unchanged; do not reorder the app so `ai-agentic` becomes default.
 4) Update any canonical active-variant docs or counts that become stale after adding this variant. At minimum, update `docs/resume/RESUME_VARIANT_POSITIONING.md`.
 
 Primary source policy (strict):

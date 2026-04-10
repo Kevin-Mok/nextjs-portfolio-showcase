@@ -49,11 +49,13 @@ export interface Resume {
 export interface ResumeSectionTitles {
   projects: string;
   experience: string;
+  agenticEngineering: string;
   skills: string;
   education: string;
 }
 
 export type ResumeVariantId =
+  | 'ai-web-dev'
   | 'web-dev'
   | 'ai-agentic'
   | 'aws'
@@ -72,10 +74,12 @@ export interface ResumeVariantDefinition {
   label: string;
   fileName: string;
   resume: Resume;
+  agenticEngineering?: ResumeProject[];
   otherExperience?: WorkExperience[];
   otherExperienceTitle?: string;
   sectionTitles?: Partial<ResumeSectionTitles>;
   summary?: string;
+  showSummary?: boolean;
   skillsBold?: string[];
   skillsHtmlLines?: string[];
   skillsLines?: string[];
@@ -245,6 +249,17 @@ const portfolioSiteProject: ResumeProject = {
   ],
 };
 
+const chessAnalyticsSiteProject: ResumeProject = {
+  name: "Kevin Mok's Chess Analytics",
+  url: 'https://chess.kevin-mok.com/',
+  languages: ['Next.js', 'TypeScript', 'Recharts', 'chess.js'],
+  date: 'Mar 2026 — Present',
+  bullets: [
+    '<strong>Built a recruiter-facing chess analytics product</strong> with <strong>Next.js App Router</strong> and <strong>TypeScript</strong> that turns raw Chess.com PGN exports into typed, interactive insights without runtime PGN parsing or a separate backend.',
+    '<strong>Engineered</strong> a static-data ingest pipeline that normalizes games into derived JSON for search, replay, Elo-over-time charts, and highlight pages, making the project read like a polished analytics product instead of a hobby demo.',
+  ],
+};
+
 const _leavesSupportProject: ResumeProject = {
   name: 'Leaves',
   url: 'http://tryleaves.app/',
@@ -308,7 +323,7 @@ const linuxConfigProject: ResumeProject = {
   languages: ['Linux', 'Bash', 'Codex', 'Claude Code'],
   date: 'Mar 2026 — Present',
   bullets: [
-    'Built a terminal-first <strong>AI agent-agnostic environment</strong> that version-controls <strong>AGENTS files</strong>, runtime defaults, <strong>reusable skills</strong>, and execution plans that <strong>break work into smaller tasks</strong> in a <strong>simultaneous multi-agent workflow</strong> for reproducible productive agentic engineering sessions.',
+    'Built a terminal-first <strong>AI agent-agnostic environment</strong> that version-controls <strong>AGENTS files</strong>, runtime defaults, <strong>reusable skills</strong>, and execution plans that <strong>break work into smaller tasks</strong> in a <strong>simultaneous multi-agent workflow</strong> and <strong>automatically writes regression tests</strong> to protect correctness.',
     'Integrated <strong>local Graphiti memory using MCP</strong>, <strong>giving agents persistent memory</strong> and relevant-fact retrieval so they reread less chat history and <strong>send fewer input tokens per prompt</strong>, thus <strong>increasing output speed and productivity</strong>.',
   ],
 };
@@ -550,13 +565,83 @@ const pythonBoldSkills = ['Python', 'Django', 'JavaScript', 'React', 'Git', 'Lin
 const defaultSectionTitles: ResumeSectionTitles = {
   projects: 'Web Dev Projects',
   experience: 'Work Experience',
+  agenticEngineering: 'Agentic Engineering',
   skills: 'Skills',
   education: 'Education',
 };
 
-export const DEFAULT_RESUME_VARIANT_ID: ResumeVariantId = 'web-dev';
+export const DEFAULT_RESUME_VARIANT_ID: ResumeVariantId = 'ai-web-dev';
 
 export const resumeVariants: ResumeVariantDefinition[] = [
+  {
+    id: 'ai-web-dev',
+    label: 'AI + Web Dev',
+    fileName: 'kevin-mok-resume-ai-web-dev.pdf',
+    showSummary: true,
+    summary:
+      'High-output full-stack web developer using agentic engineering and 4 concurrent AI workflows. Strong in Next.js, TypeScript, Node.js, Python, and Django.',
+    sectionTitles: {
+      ...defaultSectionTitles,
+      experience: 'Web Dev Work Experience',
+      projects: 'Web Dev Projects',
+      agenticEngineering: 'Agentic Engineering',
+    },
+    skillsHtmlLines: [
+      '<strong>Web:</strong> Next.js, TypeScript, React, Node.js, Tailwind CSS',
+      '<strong>Backend:</strong> Python, Django, PostgreSQL, APIs, build-time automation',
+      '<strong>Agentic Engineering:</strong> Linux, Bash, Git, Codex, Claude Code, MCP, Graphiti',
+    ],
+    skillsLines: [
+      'Web: Next.js, TypeScript, React, Node.js, Tailwind CSS',
+      'Backend: Python, Django, PostgreSQL, APIs, build-time automation',
+      'Agentic Engineering: Linux, Bash, Git, Codex, Claude Code, MCP, Graphiti',
+    ],
+    resume: {
+      contact: sharedContact,
+      projects: [
+        {
+          ...chessAnalyticsSiteProject,
+        },
+        {
+          ...portfolioSiteProject,
+          bullets: [
+            '<strong>Architected</strong> a <strong>Node.js</strong> resume engine and modular theming system that synchronizes <strong>10</strong> role-specific variants while preserving polished, cross-device frontend presentation.',
+          ],
+        },
+      ],
+      experience: [
+        {
+          ...nomarFreelanceExperience,
+          bullets: [
+            nomarFreelanceExperience.bullets[1],
+            nomarFreelanceExperience.bullets[0],
+          ],
+        },
+      ],
+      skills: [],
+      education: [
+        {
+          ...educationDefault,
+          gpa: '3.84 GPA (CS). Graduated with High Distinction.',
+        },
+      ],
+    },
+    agenticEngineering: [
+      {
+        ...linuxConfigProject,
+        bullets: [
+          '<strong>Built a terminal-first AI CLI environment</strong> around tracked <strong>AGENTS</strong>, reusable skills, and ExecPlans that supports <strong>4 concurrent agentic workflows</strong>, automatically writes regression tests, and protects correctness.',
+        ],
+      },
+    ],
+    otherExperienceTitle: 'Additional Engineering Experience',
+    otherExperience: [
+      {
+        ...redHatCloudExperience,
+        bullets: [redHatCloudExperience.bullets[0]],
+      },
+    ],
+  },
   {
     id: 'web-dev',
     label: 'Web Development',
@@ -1161,6 +1246,7 @@ export const resumeVariants: ResumeVariantDefinition[] = [
 type RedHatSection = 'cloud' | 'support';
 
 const expectedRedHatSectionByVariant: Record<ResumeVariantId, RedHatSection> = {
+  'ai-web-dev': 'cloud',
   'web-dev': 'cloud',
   'ai-agentic': 'cloud',
   aws: 'cloud',
@@ -1249,6 +1335,7 @@ export const resumeVariantByFileName: Record<string, ResumeVariantDefinition> =
   }, {} as Record<string, ResumeVariantDefinition>);
 
 export const orderedResumeVariantIds: ResumeVariantId[] = [
+  'ai-web-dev',
   'web-dev',
   'ai-agentic',
   'web-dev-django',

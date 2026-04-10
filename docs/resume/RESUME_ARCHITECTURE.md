@@ -51,9 +51,9 @@ Sub-components render resume sections
 ```
 lib/resume-data.ts (Single Source of Truth)
     ↓
-resumeData object (interfaces defined)
+resumeVariants array + variant lookup maps
     ↓
-ResumeContent imports resumeData
+ResumeContent resolves the selected variant id
     ↓
 Sub-components receive data via props
     ↓
@@ -102,21 +102,28 @@ interface Resume {
   education: Education[];
   contact: ContactInfo;
 }
+
+interface ResumeVariantDefinition {
+  id: ResumeVariantId;
+  label: string;
+  fileName: string;
+  resume: Resume;
+  summary?: string;
+  showSummary?: boolean;
+  agenticEngineering?: ResumeProject[];
+}
 ```
 
 ### Data Export
 
 ```typescript
-export const resumeData: Resume = {
-  contact: { ... },
-  projects: [ ... ],
-  experience: [ ... ],
-  skills: [ ... ],
-  education: [ ... ]
-}
+export const DEFAULT_RESUME_VARIANT_ID: ResumeVariantId = 'ai-web-dev';
+export const resumeVariants: ResumeVariantDefinition[] = [ ... ];
+export const resumeVariantById = { ... };
+export const pdfVariants = orderedResumeVariantIds.map((variantId) => ...);
 ```
 
-Single source of truth - all resume content lives here.
+Single source of truth: all resume variants live in `lib/resume-data.ts`, and the renderer selects one by id.
 
 ## Styling Architecture
 
@@ -299,7 +306,8 @@ Ensures readability even if CDN is unavailable.
 
 ```
 public/resume/
-├── kevin-mok-resume-web-dev.pdf            (default)
+├── kevin-mok-resume-ai-web-dev.pdf         (default)
+├── kevin-mok-resume-web-dev.pdf
 ├── kevin-mok-resume-aws.pdf
 ├── kevin-mok-resume-python.pdf
 ├── kevin-mok-resume-aws-web-dev.pdf
@@ -317,10 +325,10 @@ public/resume/
 **Component**: `ResumeContent.tsx`
 
 ```tsx
-const [selectedPDF, setSelectedPDF] = useState(pdfVariants[0].value);
+const selectedVariant = resumeVariantById[selectedVariantId];
 
 <a
-  href={`/resume/${selectedPDF}`}
+  href={`/resume/${selectedVariant.fileName}`}
   download
   className="pdf-download-btn"
 >
@@ -331,14 +339,12 @@ const [selectedPDF, setSelectedPDF] = useState(pdfVariants[0].value);
 **Variant Selector**:
 
 ```tsx
-const pdfVariants = [
-  { label: 'Web Development', value: 'kevin-mok-resume-web-dev.pdf' },
-  // ... more variants
-];
-
-<select value={selectedPDF} onChange={(e) => setSelectedPDF(e.target.value)}>
+<select
+  value={selectedVariantId}
+  onChange={(e) => setSelectedVariantId(resolveResumeVariantId(e.target.value))}
+>
   {pdfVariants.map((variant) => (
-    <option key={variant.value} value={variant.value}>
+    <option key={variant.id} value={variant.id}>
       {variant.label}
     </option>
   ))}
@@ -445,16 +451,16 @@ CSS module uses `.resume-latex` class to:
 
 ### Adding New Resume Sections
 
-1. Create interface in `resume-data.ts`
-2. Add data to `resumeData` object
-3. Create component: `components/tiles/content/resume/NewSection.tsx`
-4. Add `<ResumeSection>` with new component in `ResumeContent.tsx`
+1. Extend `ResumeVariantDefinition` in `lib/resume-data.ts`
+2. Add the new field to the target variant object in `resumeVariants`
+3. Reuse an existing entry component when the new section matches an existing shape, or create a focused renderer under `components/tiles/content/resume/`
+4. Add the `<ResumeSection>` wiring in `ResumeContent.tsx`
 
 ### Adding New PDF Variants
 
-1. Generate PDF with new focus
-2. Place in `public/resume/`
-3. Add entry to `pdfVariants` array in `ResumeContent.tsx`
+1. Add the variant to `lib/resume-data.ts`
+2. Register the PDF in `scripts/lib/resume-pdf-variants.mjs`
+3. Build and validate so the file is generated into `public/resume/`
 
 ### Styling Customization
 

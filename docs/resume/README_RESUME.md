@@ -179,7 +179,9 @@ This file covers:
 1. Open `lib/resume-data.ts`
 2. Update `resumeVariants` entries for the variants you maintain:
    - Contact info
+   - Optional `summary` / `showSummary` copy for variants that surface an intro block
    - Projects array
+   - Optional `agenticEngineering` project array for dedicated AI/devtools sections
    - Experience array
    - Skills array plus optional `skillsBold` / `skillsHtmlLines` formatting controls
    - Education array
@@ -192,6 +194,7 @@ This file covers:
 
 ### Add New Project
 1. Add entry to the target variant's `projects` array in `resumeVariants` (`lib/resume-data.ts`)
+   Use `agenticEngineering` instead when the content should appear in the dedicated AI/devtools section rather than `Web Dev Projects`.
 2. Include: name, url, languages, date, bullets
 3. Test on `/resume`
 4. Add PDF variant if creating new focused resume

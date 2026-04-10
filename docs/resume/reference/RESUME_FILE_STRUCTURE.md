@@ -56,7 +56,8 @@ portfolio-site/
 │
 ├── public/
 │   ├── resume/                              ← NEW: PDF directory
-│   │   ├── kevin-mok-resume-web-dev.pdf     (default, web dev focused)
+│   │   ├── kevin-mok-resume-ai-web-dev.pdf  (default, hybrid web + agentic)
+│   │   ├── kevin-mok-resume-web-dev.pdf     (web dev focused)
 │   │   ├── kevin-mok-resume-aws.pdf         (AWS focused)
 │   │   ├── kevin-mok-resume-python.pdf      (Python focused)
 │   │   ├── kevin-mok-resume-aws-web-dev.pdf (AWS + Web Dev)
@@ -185,7 +186,7 @@ portfolio-site/
 import React, { useState } from 'react';
 
 // Internal - Data
-import { resumeData } from '@/lib/resume-data';
+import { pdfVariants, resumeVariantById } from '@/lib/resume-data';
 
 // Internal - Components
 import { ResumeHeader } from './resume/ResumeHeader';
@@ -239,12 +240,11 @@ lib/resume-data.ts
 │   ├── WorkExperience
 │   ├── Education
 │   └── Resume
-└── resumeData export
-    ├── contact object
-    ├── projects array (3 items)
-    ├── experience array (1 item)
-    ├── skills array (22 items)
-    └── education array (1 item)
+└── variant exports
+    ├── DEFAULT_RESUME_VARIANT_ID
+    ├── resumeVariants array
+    ├── resumeVariantById map
+    └── pdfVariants list
 ```
 
 **Pattern**: Data structure matches component structure.
@@ -272,7 +272,7 @@ app/styles/
 ```
 public/
 ├── resume/                           (PDFs)
-│   ├── kevin-mok-resume-web-dev.pdf  (default)
+│   ├── kevin-mok-resume-ai-web-dev.pdf  (default)
 │   ├── kevin-mok-resume-*.pdf        (variants)
 │   └── (40+ files total)
 └── icons/resume/                     (SVG icons)
@@ -338,9 +338,10 @@ ContentViewer Router
     └─ case 'resume': return <ResumeContent />
     ↓
 ResumeContent Renders
-    ├─ reads resumeData from lib/resume-data.ts
+    ├─ resolves selected variant from lib/resume-data.ts
     ├─ renders ResumeHeader with contact info
-    ├─ renders ResumeSection × 4 (projects, work, skills, education)
+    ├─ optionally renders a summary block
+    ├─ renders ResumeSection blocks for work, projects, optional agentic engineering, skills, education, and optional supporting experience
     ├─ renders sub-components with data
     └─ applies classes from 13-resume-latex.css
     ↓

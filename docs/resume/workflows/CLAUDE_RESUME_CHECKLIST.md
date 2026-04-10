@@ -34,9 +34,10 @@ Any changes here automatically appear on:
 
 ```
 1. Open: lib/resume-data.ts
-2. Edit: resumeData object
+2. Edit: target entry inside resumeVariants
    - contact: phone, email, LinkedIn, GitHub
    - projects: array of project entries
+   - agenticEngineering: optional dedicated AI/devtools project array
    - experience: array of work experience
    - skills: array of technologies (order matters!)
    - education: array of education entries
@@ -61,9 +62,8 @@ Any changes here automatically appear on:
 ```
 1. Create/generate PDF
 2. Save to: public/resume/new-name.pdf
-3. Edit: components/tiles/content/ResumeContent.tsx
-4. Add to pdfVariants array:
-   { label: 'Variant Name', value: 'new-name.pdf' }
+3. Edit: lib/resume-data.ts
+4. Register the PDF in: scripts/lib/resume-pdf-variants.mjs
 5. Test: /resume dropdown shows new variant
 6. Test: Download works
 7. Commit: "feat: add [variant] resume variant"
@@ -86,7 +86,7 @@ Any changes here automatically appear on:
 ```
 1. Open: lib/resume-data.ts
 2. Add interface if needed
-3. Add data to resumeData object
+3. Add data to the target resumeVariants entry
 4. Create component: components/tiles/content/resume/SectionEntry.tsx
 5. Open: components/tiles/content/ResumeContent.tsx
 6. Add <ResumeSection> with new component

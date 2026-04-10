@@ -6,6 +6,7 @@ A complete LaTeX-styled resume system was added to the portfolio site. The resum
 - Computer Modern Serif font (authentic LaTeX aesthetic)
 - White background with black text (recruiter-friendly)
 - Multiple PDF variants for different job applications
+- Variant-specific summary and section controls for targeted recruiter narratives
 - Prominent navigation placement (sidebar + polybar)
 - Full-page route with SEO optimization
 - 40+ downloadable PDF variants
@@ -55,16 +56,17 @@ A complete LaTeX-styled resume system was added to the portfolio site. The resum
    - LinkedIn: linkedin.com/in/Kev-Mok
    - GitHub: github.com/Kevin-Mok
 
-2. **Web Dev Projects** (3 projects)
-   - Rarity Surf (March 2025)
-   - Kanban Calendar (Mar 2024)
-   - Astronofty (Jan 2023)
+2. **Visible Summary** (variant-specific)
+   - Optional recruiter-facing intro block directly under the contact header
 
-3. **Work Experience** (1 position)
-   - Red Hat: Cloud/Software Engineer Intern (May 2022 — Aug 2023)
+3. **Primary Resume Sections** (default `ai-web-dev` example)
+   - Web Dev Work Experience: `www.ntcharts.com`
+   - Web Dev Projects: `Kevin Mok's Chess Analytics`, `www.kevin-mok.com`
+   - Agentic Engineering: `AI CLI Dotfiles`
+   - Additional Engineering Experience: Red Hat cloud/software-engineering bullets
 
-4. **Skills** (22 technologies)
-   - TypeScript, JavaScript, React, Node.js, Python, Django, PostgreSQL, MongoDB, Bash, Git, Linux, Go, AWS, Kubernetes, Terraform, Docker, Jenkins, Groovy, Solidity, C, and more
+4. **Skills**
+   - Either inline skills or grouped `skillsHtmlLines` / `skillsLines`, depending on the variant
 
 5. **Education**
    - University of Toronto (St. George)
@@ -75,7 +77,8 @@ A complete LaTeX-styled resume system was added to the portfolio site. The resum
 ## PDF Variants Available
 
 ### Primary Resumes
-- `kevin-mok-resume-web-dev.pdf` - Web Development focused (default)
+- `kevin-mok-resume-ai-web-dev.pdf` - AI + Web Dev focused (default)
+- `kevin-mok-resume-web-dev.pdf` - Web Development focused
 
 ### Specialized Variants
 - `kevin-mok-resume-aws.pdf` - AWS/Cloud focused

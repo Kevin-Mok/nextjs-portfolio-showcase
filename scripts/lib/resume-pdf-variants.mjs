@@ -4,6 +4,7 @@
  * Keep this list in sync with the variant definitions in `lib/resume-data.ts`.
  */
 export const resumePdfVariants = [
+  { id: 'ai-web-dev', fileName: 'kevin-mok-resume-ai-web-dev.pdf' },
   { id: 'web-dev', fileName: 'kevin-mok-resume-web-dev.pdf' },
   {
     id: 'ai-agentic',

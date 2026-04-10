@@ -6,12 +6,13 @@ Source of truth:
 - `lib/resume-data.ts` (`resumeVariants`)
 - `scripts/lib/resume-pdf-variants.mjs` (`resumePdfVariants`)
 
-Canonical active variants: 12
+Canonical active variants: 13
 
 ## Positioning Matrix
 
 | Variant ID | Dropdown Label | PDF File | Purpose | What it is trying to sell |
 |---|---|---|---|---|
+| `ai-web-dev` | AI + Web Dev | `kevin-mok-resume-ai-web-dev.pdf` | Hybrid recruiter-facing full-stack web resume | High-output full-stack web developer who combines product-ready Next.js delivery with agentic-engineering leverage and Linux-based workflow automation. |
 | `web-dev` | Web Development | `kevin-mok-resume-web-dev.pdf` | Frontend/full-stack applications | TypeScript/React/Node developer who can build and ship web features quickly. |
 | `ai-agentic` | AI/Agentic | `kevin-mok-resume-ai-agentic.pdf` | Devtools and agentic engineering roles | Product-minded engineer for terminal-native workflows, Linux/devtools automation, local AI tooling, and human-in-the-loop agent systems. |
 | `aws` | AWS/Cloud | `kevin-mok-resume-aws.pdf` | Infrastructure and cloud operations | Cloud/platform engineer focused on AWS, Kubernetes, Terraform, uptime, and deployment reliability. |
@@ -27,8 +28,9 @@ Canonical active variants: 12
 
 ## Notes
 
-- Default variant in the app is `web-dev` (default recruiter-facing web application focus).
-- `ai-agentic` is the focused AI/agentic devtools/platform variant and should never replace `web-dev` as the default recruiter-facing option.
+- Default variant in the app is `ai-web-dev` (default recruiter-facing hybrid web + agentic engineering focus).
+- `web-dev` remains the narrower web-only option when a job application should downplay the agentic-engineering story.
+- `ai-agentic` remains the focused devtools/agentic platform variant and is intentionally separate from the default hybrid resume.
 - Recruiter one-liner (HR-safe, short format):
   `Ex-Cloud Engineer Intern @ Red Hat. Full-stack + cloud engineer (TypeScript/React, AWS/Kubernetes). Linux/FOSS advocate. CS @ UofT.`
 - `sales` and `call-centre` share similar support language but differ in emphasis:

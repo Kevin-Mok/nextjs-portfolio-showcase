@@ -11,6 +11,7 @@ This guide covers how to update, maintain, and manage the resume feature.
 **File**: `lib/resume-data.ts`
 
 All resume content lives in this single TypeScript file. Update `resumeVariants` to change what appears on the homepage tile, `/resume` page, and generated PDF downloads.
+The default resume shown at `/resume` is controlled by `DEFAULT_RESUME_VARIANT_ID`, which currently points to `ai-web-dev`.
 
 ### Updating Contact Information
 
@@ -19,7 +20,7 @@ All resume content lives in this single TypeScript file. Update `resumeVariants`
 ```typescript
 export const resumeVariants = [
   {
-    id: 'web-dev',
+    id: 'ai-web-dev',
     resume: {
       contact: {
         phone: '647-685-2500',
@@ -37,6 +38,8 @@ export const resumeVariants = [
 ### Adding a New Project
 
 **Location**: `resumeVariants[*].resume.projects` array
+
+Use `resume.projects` for the main web/project section and `agenticEngineering` when a variant needs a dedicated AI/devtools project section.
 
 ```typescript
 projects: [
