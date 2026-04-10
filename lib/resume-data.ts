@@ -318,7 +318,7 @@ const nomarStocksProject: ResumeProject = {
 };
 
 const linuxConfigProject: ResumeProject = {
-  name: 'AI CLI Dotfiles',
+  name: 'AI Command Line Dotfiles',
   url: 'https://github.com/Kevin-Mok/ai-cli-dotfiles',
   languages: ['Linux', 'Bash', 'Codex', 'Claude Code'],
   date: 'Mar 2026 — Present',
@@ -579,7 +579,7 @@ export const resumeVariants: ResumeVariantDefinition[] = [
     fileName: 'kevin-mok-resume-ai-web-dev.pdf',
     showSummary: true,
     summary:
-      'High-output full-stack web developer using agentic engineering and 4 concurrent AI workflows. Strong in Next.js, TypeScript, Node.js, Python, and Django.',
+      'High-output full-stack web developer using agentic engineering and 4 concurrent AI workflows, while manually reviewing shipped code and taking responsibility for final output. Strong in Next.js, TypeScript, Node.js, Python, and Django.',
     sectionTitles: {
       ...defaultSectionTitles,
       experience: 'Web Dev Work Experience',
@@ -630,7 +630,7 @@ export const resumeVariants: ResumeVariantDefinition[] = [
       {
         ...linuxConfigProject,
         bullets: [
-          '<strong>Built a terminal-first AI CLI environment</strong> around tracked <strong>AGENTS</strong>, reusable skills, and ExecPlans that supports <strong>4 concurrent agentic workflows</strong>, automatically writes regression tests, and protects correctness.',
+          '<strong>Built an AI command line environment</strong> around tracked <strong>AGENTS</strong>, reusable skills, and ExecPlans that supports <strong>4 concurrent agentic workflows</strong>, automatically writes regression tests, and protects correctness.',
         ],
       },
     ],
@@ -706,7 +706,7 @@ export const resumeVariants: ResumeVariantDefinition[] = [
     fileName: 'kevin-mok-resume-ai-agentic.pdf',
     primarySectionOrder: 'projects-first',
     summary:
-      'Product-minded engineer building terminal-native agent workflows, local AI tooling, and reproducible Linux/devtools automation for developer users. Strong in debugging, documentation, and human-in-the-loop systems that stay inspectable under real-world constraints.',
+      'Product-minded engineer building terminal-native agent workflows, local AI tooling, and reproducible Linux/devtools automation for developer users, while manually reviewing shipped code and taking responsibility for final output. Strong in debugging, documentation, and human-in-the-loop systems that stay inspectable under real-world constraints.',
     sectionTitles: {
       ...defaultSectionTitles,
       projects: 'Agentic / Devtools Projects',
