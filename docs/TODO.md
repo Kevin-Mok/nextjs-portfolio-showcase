@@ -1,0 +1,3 @@
+- review code manually, take responsibility
+- www.chess.kevin-mok.com
+- AI Command Line Dotfiles

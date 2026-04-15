@@ -3,6 +3,7 @@
 # Claude AI files
 .claude/
 AGENTS.override.local.md
+.worktrees/
 
 # dependencies
 /node_modules

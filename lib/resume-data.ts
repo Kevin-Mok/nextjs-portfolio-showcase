@@ -255,8 +255,8 @@ const chessAnalyticsSiteProject: ResumeProject = {
   languages: ['Next.js', 'TypeScript', 'Recharts', 'chess.js'],
   date: 'Mar 2026 — Present',
   bullets: [
-    '<strong>Built a recruiter-facing chess analytics product</strong> with <strong>Next.js App Router</strong> and <strong>TypeScript</strong> that turns raw Chess.com PGN exports into typed, interactive insights without runtime PGN parsing or a separate backend.',
-    '<strong>Engineered</strong> a static-data ingest pipeline that normalizes games into derived JSON for search, replay, Elo-over-time charts, and highlight pages, making the project read like a polished analytics product instead of a hobby demo.',
+    '<strong>Built a chess analytics product</strong> with <strong>Next.js</strong> and <strong>TypeScript</strong> that turns raw Chess.com game exports into <strong>interactive insights</strong> using Recharts without runtime parsing or a separate backend.',
+    '<strong>Engineered a static-data ingest pipeline</strong> that normalizes games from JSON for search, replay, Elo-over-time charts, and highlight pages, making the project a <strong>polished analytics product</strong>.',
   ],
 };
 
@@ -361,7 +361,7 @@ const redHatCloudExperience: WorkExperience = {
   languages: ['Kubernetes', 'GoLang', 'Jenkins'],
   date: 'May 2020 — Aug 2021',
   bullets: [
-    '<strong>Delivered 50+ merged PRs</strong> across 10 repositories using Go and Java, <strong>contributing 7,000+ lines of production-ready code</strong> to enterprise business automation ecosystems.',
+    '<strong>Delivered 50+ merged PRs</strong> across 10 repositories using <strong>Go</strong>, <strong>contributing 7,000+ lines of production-ready code</strong> to enterprise business automation ecosystems.',
     '<strong>Founded Helm charts repository from the ground up</strong>, providing a GitOps-ready deployment alternative that <strong>simplified infrastructure management for global users</strong>.',
     '<strong>Architected startup probes</strong> within the Kubernetes Operator, <strong>reducing container restart failures by 50%</strong> for complex Java-based microservices.',
     '<strong>Authored a comprehensive 472-line onboarding guide</strong>, <strong>reducing contributor ramp-up time by 60%</strong> and improving overall team productivity.',
@@ -605,7 +605,7 @@ export const resumeVariants: ResumeVariantDefinition[] = [
         {
           ...portfolioSiteProject,
           bullets: [
-            '<strong>Architected</strong> a <strong>Node.js</strong> resume engine and modular theming system that synchronizes <strong>10</strong> role-specific variants while preserving polished, cross-device frontend presentation.',
+            '<strong>Architected a Node.js resume engine</strong> and modular theming system that synchronizes <strong>10 role-specific variants</strong> while preserving polished, cross-device, singular-page PDF presentation.',
           ],
         },
       ],
@@ -630,7 +630,7 @@ export const resumeVariants: ResumeVariantDefinition[] = [
       {
         ...linuxConfigProject,
         bullets: [
-          '<strong>Built an AI command line environment</strong> around tracked <strong>AGENTS</strong>, reusable skills, and ExecPlans that supports <strong>4 concurrent agentic workflows</strong>, automatically writes regression tests, and protects correctness.',
+            '<strong>Built an AI command line environment</strong> around tracked AGENTS, reusable skills, and executive planning that supports <strong>4 concurrent agentic workflows, automatically writes regression tests</strong>, and protects correctness.',
         ],
       },
     ],
