@@ -61,6 +61,8 @@ public/images/*.sh
 public/images/originals/
 /public/videos/
 /public/resume/*.pdf
+# Ignore PDF generator snapshot images for variant rendering
+public/resume/*-1_1.png
 
 docs/PERF-OPTIMIZATION-SPEC.md
 docs/PROJECT_CONTENT_OPTIMIZATION_SPEC.md

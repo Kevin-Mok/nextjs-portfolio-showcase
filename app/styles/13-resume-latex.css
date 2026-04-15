@@ -270,6 +270,11 @@
   color: #000000;
 }
 
+.resume-summary strong {
+  font-weight: 700;
+  color: #000000;
+}
+
 .resume-section-title,
 .entry-title,
 .entry-company,
@@ -755,6 +760,7 @@
   .entry-position,
   .education-institution,
   .resume-bullets strong,
+  .resume-summary strong,
   .resume-skill-line strong,
   .resume-skills-inline strong {
     font-weight: 700;

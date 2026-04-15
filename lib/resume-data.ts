@@ -579,7 +579,7 @@ export const resumeVariants: ResumeVariantDefinition[] = [
     fileName: 'kevin-mok-resume-ai-web-dev.pdf',
     showSummary: true,
     summary:
-      'High-output full-stack web developer using agentic engineering and 4 concurrent AI workflows, while manually reviewing shipped code and taking responsibility for final output. Strong in Next.js, TypeScript, Node.js, Python, and Django.',
+      '<strong>High-output full-stack web developer</strong> using agentic engineering and <strong>4 concurrent AI workflows</strong>, while <strong>manually reviewing shipped code and taking responsibility for final output</strong>. Strong in <strong>Next.js, TypeScript, Node.js, Python, and Django</strong>.',
     sectionTitles: {
       ...defaultSectionTitles,
       experience: 'Web Dev Work Experience',

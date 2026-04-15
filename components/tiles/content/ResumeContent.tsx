@@ -93,7 +93,10 @@ const ResumeContentComponent: React.FC<ResumeContentProps> = ({
       {selectedVariant.showSummary && selectedVariant.summary ? (
         <div className="resume-summary-block">
           <h2 className="resume-section-title resume-summary-title">Intro</h2>
-          <p className="resume-summary">{selectedVariant.summary}</p>
+          <p
+            className="resume-summary"
+            dangerouslySetInnerHTML={{ __html: selectedVariant.summary }}
+          />
         </div>
       ) : null}
 
