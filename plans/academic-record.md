@@ -98,3 +98,65 @@ The shared prerequisite was committed as `72b1d33` (`fix(privacy): support revie
 Revision note: Created from the approved plan when execution was requested. Defaults and interface were made concrete for independent data and UI implementation.
 
 Revision note: Completed the implementation and final verification record. Restricted-sandbox startup was worked around through permitted execution; the baseline resume test mismatch is reported rather than silently changed. Browser inspection prompted a minimal landmark/select-name correction, then final type/lint/build and browser checks were repeated.
+
+## Fixed U of T background follow-up on 2026-10-29
+
+The user requested a repeating U of T logo background that stays still while scrolling. Replace the shared animated wallpaper only on `/academics`, using a route-scoped fixed decorative layer and a locally served signature from https://spacesandexperiences.utoronto.ca/logos-and-brand-identity/ (public preview asset `brand-UofT-300x300.jpg`). The image remains unmodified; CSS blends it into the existing theme. Preserve content, filters, the frame and other routes. Rollback restores the route/CSS changes and removes the new asset.
+
+- [x] Inspect the page, shared layout and available assets; confirm no U of T background exists.
+- [x] Add the repeating fixed layer and desktop/mobile smoke check.
+- [x] Verify actual scrolling, mobile rendering and type checking.
+
+Fresh verification: `/academics` returns HTTP 200; Chrome computed the background as fixed with repeat in both axes and pointer-events none. Desktop scroll changed to 398px while background top remained 0; at 390px phone width scroll changed to 500px while background top remained 0 and document width stayed 390px. Screenshots: `/tmp/academics-uoft-desktop.png`, `/tmp/academics-uoft-mobile.png`, `/tmp/academics-uoft-light.png`. Typecheck, academic tests, lint and diff whitespace check passed. Full production build was skipped for this route/CSS-only change. The optional context launcher and restricted preview limitations are documented in `docs/postmortem/2026-10-29-academics-background-preview.md`.
+
+No commit or push requested. Existing dirty navigation, smoke documentation, plan and lesson changes are preserved.
+
+## Single-logo refinement on 2026-10-29
+
+The latest user request supersedes the tiled background: show one large U of T crest and name surrounded by white, still fixed while scrolling. Use the unchanged official SVG from https://www.utoronto.ca/themes/custom/bootstrap_uoft/logo.svg as a CSS mask, colored navy and faint enough for the table to remain legible. Its transparent geometry allows a pure white surround without editing the image. Size the whole signature within 90vw, capped at 1120px, preserving its aspect ratio and full crest/name. Scope white backgrounds and dark text to academics so all site themes remain readable. Remove only the superseded session-created JPEG; preserve unrelated dirty work.
+
+Atomic plan:
+- [x] Confirm the previous repeating/nonwhite background does not meet the new request (browser `singleLogo:false`, `whiteSurround:false`).
+- [x] Replace it with one crisp fixed vector logo on white and update the smoke check and local lesson.
+- [x] Verify desktop/mobile layout, fixed scroll position, light/dark theme readability and regression checks.
+
+Fresh evidence: Chrome reports a pure white background, one mask with `no-repeat`, 1120px logo width at 1440px desktop width and 351px at 390px phone width. The background top stays 0 after scrolling 400px/500px respectively; phone document width equals its 390px viewport. All three theme classes compute white surroundings and navy (`rgb(0, 42, 92)`) text. Screenshots `/tmp/academics-single-logo-desktop.png` and `/tmp/academics-single-logo-mobile.png` were visually inspected. The official SVG parses without scripts, foreign objects or linked images. Fresh typecheck, lint, academic tests and `git diff --check` all exit 0. Full production build was skipped for this CSS/asset-only refinement.
+
+Manual verification, from this worktree with no sudo and the preview running on port 3027: `chrome-devtools-axi open http://127.0.0.1:3027/academics`, `chrome-devtools-axi scroll down`, then `chrome-devtools-axi resize 390 844`. Expect one complete crest/name on white; content moves while logo stays still; mobile shows the full signature without document overflow.
+
+Cursor prompt: “Review `/academics` at desktop and phone widths: confirm one large fixed U of T vector crest/name on white, navy text in all themes, working filters, and no page overflow. Preserve unrelated changes.”
+
+Suggested commit: `style(academics): use one fixed UofT logo on white`.
+
+Review: the existing fixed decorative layer suffices; no new components, hooks or dependencies are needed. Smoke docs and the local lesson match the latest direction. The optional preview restart incident is resolved; canonical incident-ledger review remains outstanding outside this worktree's writable roots.
+
+Rollback: restore the prior background rules and JPEG if the tiled design is wanted again. No shared layout, data, filters or dependencies change. No commit or push requested.
+
+## Crest-above-name refinement on 2026-10-29
+
+The latest user request places the crest above the university name. Preserve the pure white surround, navy watermark treatment and fixed scrolling behavior. Reposition the existing official vector path groups in `public/images/academics/uoft-signature.svg`: center the crest above the unmodified wordmark paths, using translations and uniform crest scaling. Expand the SVG viewBox to fit the vertical composition. Use `contain` inside a viewport-inset mask so neither the crest nor the name is cropped on phones or short desktop viewports. No new component, dependency, data or filter changes are needed.
+
+Atomic plan:
+- [x] Inspect the horizontal asset: crest x≈5–72/y≈8–156, wordmark x≈90–425/y≈56–137; neither has a layout transform.
+- [x] Stack the original vector groups and fit the entire logo to the viewport; update smoke docs and the local layout lesson.
+- [x] Verify desktop/mobile composition, scroll attachment and regression checks.
+
+Fresh verification: Chrome rendered the SVG paths and measured crest bottom 187.29 versus wordmark top 226.47, with horizontal centers within 5px. Desktop scroll changed to 450px while background top remained 0. At 390px phone width, the complete vertical logo uses `contain`, no repetition, and document width remains 390px. Visually inspected screenshots: `/tmp/academics-stacked-logo-desktop.png` and `/tmp/academics-stacked-logo-mobile.png`. White surroundings and navy text remain. XML parses safely; all original crest/lettering path data is unchanged. Fresh typecheck and academic tests pass; `git diff --check` passes. No full build or repeated lint for this CSS/SVG-only layout refinement.
+
+Manual test plan: from this worktree, no sudo needed, open `http://127.0.0.1:3027/academics` using `chrome-devtools-axi open`, scroll down with `chrome-devtools-axi scroll down`, and resize using `chrome-devtools-axi resize 390 844`. Expect the crest centered above the name, a fixed background during scroll, and full uncropped phone rendering. The prior preview listener was reused after EADDRINUSE, without stopping other processes.
+
+Cursor prompt: “Verify `/academics` shows one fixed U of T crest centered above the university name on white, at desktop and phone widths. Preserve the official vector paths and unrelated changes.”
+
+Suggested commit: `style(academics): stack UofT crest above wordmark`.
+
+Review: two transforms and a contained mask are sufficient. Smoke docs describe the final vertical arrangement. Canonical incident-ledger review remains outstanding outside this worktree as previously recorded.
+
+Rollback: remove the two SVG group transforms, restore the original horizontal viewBox and mask sizing. Preserve unrelated dirty files. No commit or push requested.
+
+## Delivery milestone: style(academics): stack UofT crest above wordmark
+
+The user invoked `$commit-session`, authorizing one focused commit and push to `origin/feat/academics`. Session ID: `01a188ca-f10b-7a22-8ef4-be943aacb56d`. The scope helper ran before staging and after README repairs but returned `unsafe` because it did not recognize successful writes. Direct-write fallback uses the captured pre-write status and observed edits in this conversation. The eight eligible paths are the academics route, academics CSS, stacked SVG, background preview postmortem, background-only smoke/lesson/plan additions, and the required README repairs. Exclude the pre-existing NavigationTile edit, Contents-navigation smoke check, Contents-link plan follow-up, worktree-discovery lesson and link-verification postmortem. Construct the staged versions of the three mixed files separately; preserve their working copies and unrelated hunks.
+
+Completed: the single fixed logo is centered with crest above name, a pure white surround and readable navy text. Fresh typecheck, lint and academic tests all exited 0; full logs are under `/tmp/academics-session-commit-checks/`. README gate reports `pass_no_change` after source-grounded section, CSS-count, installed-version, repository-name, contact/anchor and license-order repairs. The independent evidence review verified all five claims with no actionable findings. Desktop/mobile browser evidence from the implementation turns remains valid; no app code changed in this delivery turn. Full production build and cross-browser testing were skipped for this CSS/SVG/docs change.
+
+The existing active hooks stay intact. Run the canonical privacy gate against the exact staged candidate immediately before the commit, inspect staged content, then make the authorized upstream push. No Vercel project is configured: the repository uses `railway.toml`; a manual README example does not establish a Vercel deployment target. Local implementation has no unresolved product blocker; production rollout is not independently verified. Canonical incident-ledger review remains outstanding outside this worktree at `/home/kevin/linux-config/dot_agents/skills/postmortem-memory/`. Commit/push receipts belong in the Codex output for this subject.

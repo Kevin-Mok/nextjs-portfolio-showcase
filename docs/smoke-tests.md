@@ -4,6 +4,9 @@ Use these checks to verify the site's public pages after changes. Exercise the r
 
 ## Academic Record
 
+- Action: Open `/academics` on desktop and mobile, then scroll down through the course list. Repeat in Tokyo Night, Nord, and Solarized Light.
+  Expected: One large, centered U of T logo appears on white, with the crest centered above the university name and no tiling, inversion or cropping. It stays in the same position as content scrolls. Dark text remains readable in all themes and the background does not intercept clicks.
+
 - Action: Open the landing page at desktop and mobile widths and follow **Academic Record** from the bio. Reload `/academics` directly.
   Expected: Both links reach the framed Academic Record page for Kevin Mok. The default CSC view contains 23 records, with 22 numeric marks across 11.0 credits, a percentage average of 86.68%, and a clearly labeled 4.0/4.0 GPA equivalent. Its explanation distinguishes this from official GPA.
 

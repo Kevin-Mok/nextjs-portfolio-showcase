@@ -19,7 +19,7 @@ A production-ready developer portfolio built with Next.js 15, featuring a tiled 
 
 ---
 
-## Why This Repo Stands Out
+### Why This Repo Stands Out
 
 - It is not a generic portfolio shell. The site ships a Hyprland-inspired desktop UI, a distinct mobile layout, MDX-backed writing, and a resume system with automated PDF generation and layout validation in one repo.
 - The repo shows product thinking, not just frontend polish: contact delivery, spam protection, CDN-aware media handling, typed content pipelines, and recruiter-ready resume workflows are all versioned together.
@@ -46,12 +46,12 @@ A production-ready developer portfolio built with Next.js 15, featuring a tiled 
 - **Audio Narration**: Blog post audio with auto-detection, playback controls, and analytics tracking
 - **Contact Form**: Production-ready Resend integration with 5-layer spam protection (honeypot, rate limiting, validation)
 - **CDN Integration**: Optional Cloudflare R2 for optimized image delivery with automatic fallback
-- **Modern Architecture**: Next.js 15.5 + TypeScript strict mode + modular CSS (12 focused modules under 200 LOC each)
+- **Modern Architecture**: Next.js 15.5 + TypeScript strict mode + modular CSS grouped by concern
 - **Zero-Config Deployment**: Railway + Railpack auto-detection with intelligent caching
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Install and bootstrap
 
 ### Prerequisites
 
@@ -78,7 +78,9 @@ npm run dev
 
 Visit **http://localhost:3000**
 
-### Build Commands
+## Day-to-Day use and Command Reference
+
+Run the development server while editing; use the build and validation commands before shipping changes.
 
 ```bash
 npm run build      # Production build
@@ -91,7 +93,7 @@ These top-level npm entrypoints are normally run exactly as shown here; the repo
 
 ### Academic Record
 
-Follow **Academic Record** from the landing bio or visit `/academics`. The page defaults to CSC records ordered by highest mark. Filter by subject prefix, calendar year, or a verified programming-language tag; use **Reset to CSC** to restore the defaults. Reloading also resets the page.
+Follow **Academic Record** from the landing bio or visit `/academics`. The page defaults to CSC records ordered by highest mark. Filter by subject prefix, calendar year, or a verified programming-language tag; use **Reset to CSC** to restore the defaults. Reloading also resets the page. A single U of T crest sits above the university name on a fixed white background; the full logo remains visible as the course list scrolls.
 
 The initial view contains 23 CSC attempts, including one withdrawal: 22 numeric marks across 11.0 credits average **86.68%**, with a **4.0/4.0 GPA equivalent**. The equivalent converts the unrounded percentage using the U of T grade scale; it is not an official cumulative GPA or the average of individual course grade points. Numeric repeat and EXT attempts are included; nonnumeric outcomes and zero-credit records are excluded from the summary.
 
@@ -181,7 +183,7 @@ See [CLAUDE.md](CLAUDE.md) for detailed architecture documentation.
 Auto-deployment with Railpack builder:
 
 1. Visit [railway.app](https://railway.app) → **New Project** → **Deploy from GitHub**
-2. Select `kmok-portfolio` repository
+2. Select `portfolio-site` repository
 3. **Add environment variables** in **Variables** tab:
    - `RESEND_API_KEY` (required)
    - `RESEND_FROM_EMAIL` (required)
@@ -209,9 +211,9 @@ Add environment variables via Vercel dashboard → Settings → Environment Vari
 
 ## 🧱 Implementation Snapshot
 
-**Framework**: Next.js 15.5.4 with App Router and Turbopack
+**Framework**: Next.js 15.5.9 with App Router and Turbopack
 **Language**: TypeScript 5.0 (strict mode)
-**Styling**: Tailwind CSS v4 + Modular CSS architecture (12 modules)
+**Styling**: Tailwind CSS v4 + modular stylesheets
 **Content**: Content Collections + MDX (blog & projects)
 **Animation**: Framer Motion 12.23
 **Email**: Resend API 6.1.2 + React Email
@@ -224,7 +226,7 @@ Add environment variables via Vercel dashboard → Settings → Environment Vari
 
 ### Key Features
 
-- **Modular CSS**: 12 focused stylesheets organized by concern
+- **Modular CSS**: Focused stylesheets organized by concern
 - **MDX Content**: Blog and projects powered by Content Collections with syntax highlighting
 - **CDN Integration**: Cloudflare R2 for optimized image delivery with fallback to local
 - **Responsive**: Desktop (≥1024px) tiled layout, Mobile (<1024px) dual-mode
@@ -236,10 +238,10 @@ Add environment variables via Vercel dashboard → Settings → Environment Vari
 ## 📁 Project Structure
 
 ```
-kmok-portfolio/
+portfolio-site/
 ├── app/                    # Next.js App Router
 │   ├── api/contact/       # Contact form API endpoint
-│   ├── styles/            # 12 modular CSS files
+│   ├── styles/            # Stylesheets grouped by concern
 │   └── globals.css        # CSS module imports
 ├── components/
 │   ├── layout/            # Desktop & mobile layouts
@@ -277,28 +279,6 @@ kmok-portfolio/
 - **[docs/resume/resume-generation-spec.md](docs/resume/resume-generation-spec.md)** - Resume PDF baseline/spacing/bold rules and verification workflow
 - **[docs/specs/CONTACT_FORM_SPEC.md](docs/specs/CONTACT_FORM_SPEC.md)** - Contact form implementation details
 - **[docs/specs/CDN_DEPLOYMENT_SPEC.md](docs/specs/CDN_DEPLOYMENT_SPEC.md)** - Cloudflare R2 CDN setup guide
-
----
-
-## 📄 License
-
-MIT License © 2025 David Leer
-
-```
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-```
 
 ---
 
@@ -341,42 +321,42 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
 - **Designed a portfolio experience** with a **6-panel desktop layout** and smooth mobile flow, so hiring managers could scan skills, projects, and resume links quickly without getting lost in navigation.
 - **Added 3 themes** and **15 accent colors** to keep content readable across preferences, improving first impressions for recruiters and reducing friction for returning visitors.
 - **Set up 5 spam checks** on the contact form and **cut low-quality submissions**, so real recruiter outreach was easier to identify and respond to quickly.
-- **Split styles into 12 small CSS modules** (under **200 lines each**), making edits safer and reducing accidental UI regressions during rapid updates.
+- **Split styles into focused CSS modules**, making edits safer and reducing accidental UI regressions during rapid updates.
 - **Auto-generated and validated 13 resume variants** and **kept role-specific links consistent**, so resume content stayed accurate whenever project details changed.
 
 ### `aws`
 - **Designed a portfolio experience** with a **6-panel desktop layout** and smooth mobile flow, so hiring managers could scan skills, projects, and resume links quickly without getting lost in navigation.
 - **Added 3 themes** and **15 accent colors** to keep content readable across preferences, improving first impressions for recruiters and reducing friction for returning visitors.
 - **Set up 5 spam checks** on the contact form and **cut low-quality submissions**, so real recruiter outreach was easier to identify and respond to quickly.
-- **Split styles into 12 small CSS modules** (under **200 lines each**), making edits safer and reducing accidental UI regressions during rapid updates.
+- **Split styles into focused CSS modules**, making edits safer and reducing accidental UI regressions during rapid updates.
 - **Auto-generated and validated 13 resume variants** and **kept role-specific links consistent**, so resume content stayed accurate whenever project details changed.
 
 ### `python`
 - **Designed a portfolio experience** with a **6-panel desktop layout** and smooth mobile flow, so hiring managers could scan skills, projects, and resume links quickly without getting lost in navigation.
 - **Added 3 themes** and **15 accent colors** to keep content readable across preferences, improving first impressions for recruiters and reducing friction for returning visitors.
 - **Set up 5 spam checks** on the contact form and **cut low-quality submissions**, so real recruiter outreach was easier to identify and respond to quickly.
-- **Split styles into 12 small CSS modules** (under **200 lines each**), making edits safer and reducing accidental UI regressions during rapid updates.
+- **Split styles into focused CSS modules**, making edits safer and reducing accidental UI regressions during rapid updates.
 - **Auto-generated and validated 13 resume variants** and **kept role-specific links consistent**, so resume content stayed accurate whenever project details changed.
 
 ### `aws-web-dev`
 - **Designed a portfolio experience** with a **6-panel desktop layout** and smooth mobile flow, so hiring managers could scan skills, projects, and resume links quickly without getting lost in navigation.
 - **Added 3 themes** and **15 accent colors** to keep content readable across preferences, improving first impressions for recruiters and reducing friction for returning visitors.
 - **Set up 5 spam checks** on the contact form and **cut low-quality submissions**, so real recruiter outreach was easier to identify and respond to quickly.
-- **Split styles into 12 small CSS modules** (under **200 lines each**), making edits safer and reducing accidental UI regressions during rapid updates.
+- **Split styles into focused CSS modules**, making edits safer and reducing accidental UI regressions during rapid updates.
 - **Auto-generated and validated 13 resume variants** and **kept role-specific links consistent**, so resume content stayed accurate whenever project details changed.
 
 ### `aws-python`
 - **Designed a portfolio experience** with a **6-panel desktop layout** and smooth mobile flow, so hiring managers could scan skills, projects, and resume links quickly without getting lost in navigation.
 - **Added 3 themes** and **15 accent colors** to keep content readable across preferences, improving first impressions for recruiters and reducing friction for returning visitors.
 - **Set up 5 spam checks** on the contact form and **cut low-quality submissions**, so real recruiter outreach was easier to identify and respond to quickly.
-- **Split styles into 12 small CSS modules** (under **200 lines each**), making edits safer and reducing accidental UI regressions during rapid updates.
+- **Split styles into focused CSS modules**, making edits safer and reducing accidental UI regressions during rapid updates.
 - **Auto-generated and validated 13 resume variants** and **kept role-specific links consistent**, so resume content stayed accurate whenever project details changed.
 
 ### `web-dev-django`
 - **Designed a portfolio experience** with a **6-panel desktop layout** and smooth mobile flow, so hiring managers could scan skills, projects, and resume links quickly without getting lost in navigation.
 - **Added 3 themes** and **15 accent colors** to keep content readable across preferences, improving first impressions for recruiters and reducing friction for returning visitors.
 - **Set up 5 spam checks** on the contact form and **cut low-quality submissions**, so real recruiter outreach was easier to identify and respond to quickly.
-- **Split styles into 12 small CSS modules** (under **200 lines each**), making edits safer and reducing accidental UI regressions during rapid updates.
+- **Split styles into focused CSS modules**, making edits safer and reducing accidental UI regressions during rapid updates.
 - **Auto-generated and validated 13 resume variants** and **kept role-specific links consistent**, so resume content stayed accurate whenever project details changed.
 
 ### `it-support`
@@ -384,32 +364,32 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
 - **Added 3 themes** and **15 color options** to improve readability for different viewers and make longer browsing sessions more comfortable.
 - **Used 5 spam checks** in the contact form and **reduced junk messages**, so real hiring conversations received faster attention.
 - **Kept 13 resume variants aligned automatically** and **avoided manual cleanup**, so each role-focused resume stayed accurate after content updates.
-- **Organized styles into 12 small modules** (under **200 lines each**) and **made updates predictable**, reducing avoidable rework during iterative changes.
+- **Organized styles into focused modules** and **made updates predictable**, reducing avoidable rework during iterative changes.
 
 ### `it-support-aws`
 - **Built a portfolio that is easy to scan** with a **6-panel desktop layout**, so recruiters can find key information quickly on both desktop and mobile.
 - **Added 3 themes** and **15 color options** to improve readability for different viewers and make longer browsing sessions more comfortable.
 - **Used 5 spam checks** in the contact form and **reduced junk messages**, so real hiring conversations received faster attention.
 - **Kept 13 resume variants aligned automatically** and **avoided manual cleanup**, so each role-focused resume stayed accurate after content updates.
-- **Organized styles into 12 small modules** (under **200 lines each**) and **made updates predictable**, reducing avoidable rework during iterative changes.
+- **Organized styles into focused modules** and **made updates predictable**, reducing avoidable rework during iterative changes.
 
 ### `sales`
 - **Built a portfolio that is easy to scan** with a **6-panel desktop layout**, so recruiters can find key information quickly on both desktop and mobile.
 - **Added 3 themes** and **15 color options** to improve readability for different viewers and make longer browsing sessions more comfortable.
 - **Used 5 spam checks** in the contact form and **reduced junk messages**, so real hiring conversations received faster attention.
 - **Kept 13 resume variants aligned automatically** and **avoided manual cleanup**, so each role-focused resume stayed accurate after content updates.
-- **Organized styles into 12 small modules** (under **200 lines each**) and **made updates predictable**, reducing avoidable rework during iterative changes.
+- **Organized styles into focused modules** and **made updates predictable**, reducing avoidable rework during iterative changes.
 
 ### `call-centre`
 - **Built a portfolio that is easy to scan** with a **6-panel desktop layout**, so recruiters can find key information quickly on both desktop and mobile.
 - **Added 3 themes** and **15 color options** to improve readability for different viewers and make longer browsing sessions more comfortable.
 - **Used 5 spam checks** in the contact form and **reduced junk messages**, so real hiring conversations received faster attention.
 - **Kept 13 resume variants aligned automatically** and **avoided manual cleanup**, so each role-focused resume stayed accurate after content updates.
-- **Organized styles into 12 small modules** (under **200 lines each**) and **made updates predictable**, reducing avoidable rework during iterative changes.
+- **Organized styles into focused modules** and **made updates predictable**, reducing avoidable rework during iterative changes.
 
 ## 📧 Contact
 
-**David Leer**
+**Kevin Mok**
 
 - **GitHub**: [@kmokdefi](https://github.com/kmokdefi)
 - **Twitter**: [@kmok_defi](https://x.com/kmok_defi)
@@ -420,6 +400,28 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
 
 **Built with <3 by [@kmokdefi](https://github.com/kmokdefi)**
 
-[⬆ Back to Top](#david-leers-portfolio)
+[⬆ Back to Top](#kevin-moks-portfolio)
 
 </div>
+
+---
+
+## 📄 License
+
+MIT License © 2025 David Leer
+
+```
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+```

@@ -11,3 +11,5 @@
 - 2026-04-10: When updating AI-focused resume intro copy, explicitly state that shipped code is manually reviewed and that final responsibility stays with the engineer when the user asks for that framing.
 - 2026-04-10: When editing Agentic Engineering project copy, use "command line" spelling out CLI when requested, and avoid inconsistent shorthand in bullets.
 - 2026-04-10: When changing resume source content, always regenerate resume PDFs (`npm run generate-resume-pdfs`), and ensure build-dependent gates are rerun if layout is touched.
+- 2026-10-29: The academics background direction is one large, fixed U of T crest and name on white. Use the official vector asset without tiling or theme inversion, and keep course text readable over it.
+- 2026-10-29: Stack the academics background crest centered above the university name; fit the complete vertical logo within both viewport dimensions so it stays uncropped on phones and short desktop windows.

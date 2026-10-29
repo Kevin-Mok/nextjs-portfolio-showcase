@@ -10,7 +10,8 @@ export const metadata: Metadata = {
 
 export default function AcademicsPage() {
   return (
-    <FramedPageLayout autoFocus={false}>
+    <FramedPageLayout autoFocus={false} showBackground={false}>
+      <div className="academics-background" aria-hidden="true" />
       <AcademicExplorer />
     </FramedPageLayout>
   );
