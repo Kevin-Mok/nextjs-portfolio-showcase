@@ -4,6 +4,12 @@ Repository-specific instructions for AI coding agents working in `portfolio-site
 
 This is a Next.js portfolio site, not a mobile app repository.
 
+## Public Portfolio and Privacy
+
+This site intentionally showcases Kevin Mok publicly. His approved professional identity, biography, public contact links, resume, course results, photographs, and project media are publication content. Preserve them rather than redacting them merely because they identify him.
+
+Run the shared privacy gate before committing. Review email/IP findings against this publication purpose. For confirmed public contact details or non-sensitive pattern matches in reviewed assets, use the shared category-specific approval mechanism bound to the exact path and content hash; changed bytes require fresh review. Keep secrets, authentication material, explicit private-policy matches, raw transcript PDFs, student identifiers, and unapproved personal information blocked. Never substitute a blanket portfolio exemption or disable hooks.
+
 ---
 
 ## Scope and Precedence

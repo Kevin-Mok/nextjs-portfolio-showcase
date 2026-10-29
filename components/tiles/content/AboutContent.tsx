@@ -86,6 +86,13 @@ const AboutContentComponent: React.FC = () => {
             View Resume
           </Link>
 
+          <Link
+            href="/academics"
+            className="inline-flex min-h-11 items-center font-semibold text-[var(--accent-color)] underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent-color)]"
+          >
+            Academic Record
+          </Link>
+
           {system.upwork && (
             <a
               href={system.upwork.url}

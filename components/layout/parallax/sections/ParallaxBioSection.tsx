@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { ProfilePhoto } from '@/components/ui/ProfilePhoto';
 
 interface PersonalInfo {
@@ -79,6 +80,12 @@ export const ParallaxBioSection: React.FC<ParallaxBioSectionProps> = ({
 
       <div className="parallax-copy-stack">
         {intro && <p className="parallax-copy-lead">{intro}</p>}
+        <Link
+          href="/academics"
+          className="inline-flex min-h-11 w-fit items-center font-semibold text-[var(--accent-color)] underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent-color)]"
+        >
+          Academic Record
+        </Link>
         {experience && <p className="parallax-copy-body">{experience}</p>}
         {leadership && <p className="parallax-copy-body parallax-copy-muted">{leadership}</p>}
         {tagline && <p className="parallax-copy-tagline">{tagline}</p>}

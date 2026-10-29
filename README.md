@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Next.js](https://img.shields.io/badge/Next.js-15.5.4-black?style=flat-square&logo=next.js)
+![Next.js](https://img.shields.io/badge/Next.js-15.5.9-black?style=flat-square&logo=next.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=flat-square&logo=typescript)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-v4-38bdf8?style=flat-square&logo=tailwindcss)
 ![Content Collections](https://img.shields.io/badge/Content_Collections-0.11-orange?style=flat-square)
@@ -13,7 +13,7 @@ A production-ready developer portfolio built with Next.js 15, featuring a tiled 
 
 **Modern tech stack meets terminal aesthetics—designed for developers who appreciate both craft and performance.**
 
-[kmok.ai](https://kmok.ai) • [Report Issue](https://github.com/kmokdefi/kmok-portfolio/issues)
+[kmok.ai](https://kmok.ai) • [Report Issue](https://github.com/Kevin-Mok/portfolio-site/issues)
 
 </div>
 
@@ -41,6 +41,7 @@ A production-ready developer portfolio built with Next.js 15, featuring a tiled 
 - **Keyboard Navigation**: Vim-style hjkl movement + Tab cycling + workspace indicators via Polybar
 - **Mobile Experience**: Parallax scrolling with depth effects and scroll progress indicators
 - **Theme System**: 3 curated presets (Tokyo Night, Nord, Solarized Light) + 15 accent color swatches
+- **Academic Record**: A dedicated `/academics` coursework explorer, linked from the desktop and mobile landing bio, with subject/year/verified-language filters, sortable marks, and a credit-weighted percentage plus clearly labeled GPA equivalent.
 - **Content Management**: MDX-powered blog and projects with syntax highlighting and reading time
 - **Audio Narration**: Blog post audio with auto-detection, playback controls, and analytics tracking
 - **Contact Form**: Production-ready Resend integration with 5-layer spam protection (honeypot, rate limiting, validation)
@@ -55,7 +56,7 @@ A production-ready developer portfolio built with Next.js 15, featuring a tiled 
 ### Prerequisites
 
 ```bash
-node >= 18.0.0
+node >= 18.18.0
 npm >= 9.0.0
 ```
 
@@ -63,8 +64,8 @@ npm >= 9.0.0
 
 ```bash
 # Clone and install
-git clone https://github.com/kmokdefi/kmok-portfolio.git
-cd kmok-portfolio
+git clone https://github.com/Kevin-Mok/portfolio-site.git
+cd portfolio-site
 npm install
 
 # Configure environment
@@ -87,6 +88,16 @@ npm run lint       # Code linting
 ```
 
 These top-level npm entrypoints are normally run exactly as shown here; the repo does not rely on extra README-level flags for day-to-day use.
+
+### Academic Record
+
+Follow **Academic Record** from the landing bio or visit `/academics`. The page defaults to CSC records ordered by highest mark. Filter by subject prefix, calendar year, or a verified programming-language tag; use **Reset to CSC** to restore the defaults. Reloading also resets the page.
+
+The initial view contains 23 CSC attempts, including one withdrawal: 22 numeric marks across 11.0 credits average **86.68%**, with a **4.0/4.0 GPA equivalent**. The equivalent converts the unrounded percentage using the U of T grade scale; it is not an official cumulative GPA or the average of individual course grade points. Numeric repeat and EXT attempts are included; nonnumeric outcomes and zero-credit records are excluded from the summary.
+
+Public course records live in `lib/academic-data.ts` and are validated on load. Language tags link to verified course materials; records without verified language evidence remain untagged. The original transcript PDF and its identifying headers are not served by this app. Using Node 22.15 or newer for TypeScript stripping, check the calculation/filter/sort behavior with `node --experimental-strip-types --test scripts/lib/academics.test.mjs`. Browser checks are documented in [the smoke checklist](docs/smoke-tests.md).
+
+This portfolio intentionally publishes approved identity, professional contact information, and media. The [public-portfolio privacy policy](AGENTS.repo.md#public-portfolio-and-privacy) preserves that content while keeping secrets and private transcript identifiers excluded. Privacy-gate exceptions require review of the exact file and content hash; changing a file requires a fresh review.
 
 ### Resume PDF Workflow
 
@@ -113,7 +124,7 @@ Create `.env.local` from template and configure:
 | Variable | Required | Description |
 |----------|----------|-------------|
 | `RESEND_API_KEY` | ✅ Yes | Resend API key ([resend.com](https://resend.com) - free: 100 emails/day, 3K/month) |
-| `RESEND_FROM_EMAIL` | ✅ Yes | Verified domain email for Resend (e.g., `contact@kmok.ai`) |
+| `RESEND_FROM_EMAIL` | ✅ Yes | Sender address verified with Resend |
 | `NEXT_PUBLIC_CONTACT_EMAIL` | ✅ Yes | Email address to receive form submissions |
 | `NEXT_PUBLIC_CDN_URL` | Optional | Cloudflare R2 CDN URL (e.g., `https://cdn.kmok.ai`) |
 | `NEXT_PUBLIC_NAME` | Recommended | Your full name |
