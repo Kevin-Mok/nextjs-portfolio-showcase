@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Next.js](https://img.shields.io/badge/Next.js-15.5.4-black?style=flat-square&logo=next.js)
+![Next.js](https://img.shields.io/badge/Next.js-15.5.9-black?style=flat-square&logo=next.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=flat-square&logo=typescript)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-v4-38bdf8?style=flat-square&logo=tailwindcss)
 ![Content Collections](https://img.shields.io/badge/Content_Collections-0.11-orange?style=flat-square)
@@ -13,7 +13,7 @@ A production-ready developer portfolio built with Next.js 15, featuring a tiled 
 
 **Modern tech stack meets terminal aesthetics—designed for developers who appreciate both craft and performance.**
 
-[kmok.ai](https://kmok.ai) • [Report Issue](https://github.com/kmokdefi/kmok-portfolio/issues)
+[kmok.ai](https://kmok.ai) • [Report Issue](https://github.com/Kevin-Mok/portfolio-site/issues)
 
 </div>
 
@@ -32,7 +32,7 @@ A production-ready developer portfolio built with Next.js 15, featuring a tiled 
 - **Content Collections + MDX**: stores blog and project content in tracked files with build-time validation instead of a separate CMS.
 - **Tailwind CSS v4 + modular CSS + Framer Motion**: mixes fast utility styling with deliberately scoped stylesheet modules and animation control for the window-manager aesthetic.
 - **Resend + Zod**: gives the contact flow production email delivery plus schema-validated input handling.
-- **Local resume PDF tooling**: the repo generates and validates 13 resume variants with local Computer Modern fonts, layout baselines, and deterministic PDF checks.
+- **Local resume PDF tooling**: the repo generates and validates 25 resume variants with local Computer Modern fonts, layout baselines, and deterministic PDF checks.
 - **Optional Cloudflare R2**: keeps the project deployable without CDN setup while still supporting a faster production media path.
 
 ## ✨ Features
@@ -45,7 +45,7 @@ A production-ready developer portfolio built with Next.js 15, featuring a tiled 
 - **Audio Narration**: Blog post audio with auto-detection, playback controls, and analytics tracking
 - **Contact Form**: Production-ready Resend integration with 5-layer spam protection (honeypot, rate limiting, validation)
 - **CDN Integration**: Optional Cloudflare R2 for optimized image delivery with automatic fallback
-- **Modern Architecture**: Next.js 15.5 + TypeScript strict mode + modular CSS (12 focused modules under 200 LOC each)
+- **Modern Architecture**: Next.js 15.5 + TypeScript strict mode + modular CSS with focused stylesheet files
 - **Zero-Config Deployment**: Railway + Railpack auto-detection with intelligent caching
 
 ---
@@ -63,8 +63,8 @@ npm >= 9.0.0
 
 ```bash
 # Clone and install
-git clone https://github.com/kmokdefi/kmok-portfolio.git
-cd kmok-portfolio
+git clone https://github.com/Kevin-Mok/portfolio-site.git
+cd portfolio-site
 npm install
 
 # Configure environment
@@ -90,7 +90,7 @@ These top-level npm entrypoints are normally run exactly as shown here; the repo
 
 ### Resume PDF Workflow
 
-`npm run build` also regenerates resume PDFs in `public/resume/`.
+`npm run build` also regenerates all 25 active resume PDFs in `public/resume/`. Browse them in the `/resume` selector or open `/resume?variant=developer-tools`. The [variant guide](docs/resume/RESUME_VARIANT_POSITIONING.md) explains role fit and evidence limits.
 Resume PDF rendering uses local Computer Modern assets in `public/fonts/cmu/` for deterministic layout metrics.
 
 ```bash
@@ -321,52 +321,52 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
 
 ### `ai-web-dev`
 - **Built a hybrid recruiter-facing resume** that combines **Next.js web delivery** with an **agentic engineering** story, making `/resume` lead with the strongest current full-stack narrative by default.
-- **Added a visible summary block** for the default resume variant, so recruiters immediately see the stack and the **4 concurrent AI workflow** angle before scanning project bullets.
-- **Separated AI/devtools work into a dedicated `Agentic Engineering` section**, keeping **web projects** and **agentic systems** distinct without losing one-page fit.
+- **Added a visible summary block** for the default resume variant, so recruiters see the web development, session analytics and transcription focus before scanning project bullets.
+- **Organized evidence-backed work into Experience and Projects**, preserving each selected draft’s section order across website and PDF rendering.
 - **Kept homepage and PDF entry points in sync** by deriving the CTA PDF link from the default variant instead of hard-coding an older web-only file.
-- **Auto-generated and validated 13 resume variants** and **kept role-specific links consistent**, so resume content stayed accurate whenever project details changed.
+- **Auto-generated and validated 25 resume variants** and **kept role-specific links consistent**, so resume content stayed accurate whenever project details changed.
 
 ### `web-dev`
 - **Designed a portfolio experience** with a **6-panel desktop layout** and smooth mobile flow, so hiring managers could scan skills, projects, and resume links quickly without getting lost in navigation.
 - **Added 3 themes** and **15 accent colors** to keep content readable across preferences, improving first impressions for recruiters and reducing friction for returning visitors.
 - **Set up 5 spam checks** on the contact form and **cut low-quality submissions**, so real recruiter outreach was easier to identify and respond to quickly.
-- **Split styles into 12 small CSS modules** (under **200 lines each**), making edits safer and reducing accidental UI regressions during rapid updates.
-- **Auto-generated and validated 13 resume variants** and **kept role-specific links consistent**, so resume content stayed accurate whenever project details changed.
+- **Organized styles into focused CSS modules**, keeping theme, layout and print rules easier to inspect and maintain.
+- **Auto-generated and validated 25 resume variants** and **kept role-specific links consistent**, so resume content stayed accurate whenever project details changed.
 
 ### `aws`
 - **Designed a portfolio experience** with a **6-panel desktop layout** and smooth mobile flow, so hiring managers could scan skills, projects, and resume links quickly without getting lost in navigation.
 - **Added 3 themes** and **15 accent colors** to keep content readable across preferences, improving first impressions for recruiters and reducing friction for returning visitors.
 - **Set up 5 spam checks** on the contact form and **cut low-quality submissions**, so real recruiter outreach was easier to identify and respond to quickly.
-- **Split styles into 12 small CSS modules** (under **200 lines each**), making edits safer and reducing accidental UI regressions during rapid updates.
-- **Auto-generated and validated 13 resume variants** and **kept role-specific links consistent**, so resume content stayed accurate whenever project details changed.
+- **Organized styles into focused CSS modules**, keeping theme, layout and print rules easier to inspect and maintain.
+- **Auto-generated and validated 25 resume variants** and **kept role-specific links consistent**, so resume content stayed accurate whenever project details changed.
 
 ### `python`
 - **Designed a portfolio experience** with a **6-panel desktop layout** and smooth mobile flow, so hiring managers could scan skills, projects, and resume links quickly without getting lost in navigation.
 - **Added 3 themes** and **15 accent colors** to keep content readable across preferences, improving first impressions for recruiters and reducing friction for returning visitors.
 - **Set up 5 spam checks** on the contact form and **cut low-quality submissions**, so real recruiter outreach was easier to identify and respond to quickly.
-- **Split styles into 12 small CSS modules** (under **200 lines each**), making edits safer and reducing accidental UI regressions during rapid updates.
-- **Auto-generated and validated 13 resume variants** and **kept role-specific links consistent**, so resume content stayed accurate whenever project details changed.
+- **Organized styles into focused CSS modules**, keeping theme, layout and print rules easier to inspect and maintain.
+- **Auto-generated and validated 25 resume variants** and **kept role-specific links consistent**, so resume content stayed accurate whenever project details changed.
 
 ### `aws-web-dev`
 - **Designed a portfolio experience** with a **6-panel desktop layout** and smooth mobile flow, so hiring managers could scan skills, projects, and resume links quickly without getting lost in navigation.
 - **Added 3 themes** and **15 accent colors** to keep content readable across preferences, improving first impressions for recruiters and reducing friction for returning visitors.
 - **Set up 5 spam checks** on the contact form and **cut low-quality submissions**, so real recruiter outreach was easier to identify and respond to quickly.
-- **Split styles into 12 small CSS modules** (under **200 lines each**), making edits safer and reducing accidental UI regressions during rapid updates.
-- **Auto-generated and validated 13 resume variants** and **kept role-specific links consistent**, so resume content stayed accurate whenever project details changed.
+- **Organized styles into focused CSS modules**, keeping theme, layout and print rules easier to inspect and maintain.
+- **Auto-generated and validated 25 resume variants** and **kept role-specific links consistent**, so resume content stayed accurate whenever project details changed.
 
 ### `aws-python`
 - **Designed a portfolio experience** with a **6-panel desktop layout** and smooth mobile flow, so hiring managers could scan skills, projects, and resume links quickly without getting lost in navigation.
 - **Added 3 themes** and **15 accent colors** to keep content readable across preferences, improving first impressions for recruiters and reducing friction for returning visitors.
 - **Set up 5 spam checks** on the contact form and **cut low-quality submissions**, so real recruiter outreach was easier to identify and respond to quickly.
-- **Split styles into 12 small CSS modules** (under **200 lines each**), making edits safer and reducing accidental UI regressions during rapid updates.
-- **Auto-generated and validated 13 resume variants** and **kept role-specific links consistent**, so resume content stayed accurate whenever project details changed.
+- **Organized styles into focused CSS modules**, keeping theme, layout and print rules easier to inspect and maintain.
+- **Auto-generated and validated 25 resume variants** and **kept role-specific links consistent**, so resume content stayed accurate whenever project details changed.
 
 ### `web-dev-django`
 - **Designed a portfolio experience** with a **6-panel desktop layout** and smooth mobile flow, so hiring managers could scan skills, projects, and resume links quickly without getting lost in navigation.
 - **Added 3 themes** and **15 accent colors** to keep content readable across preferences, improving first impressions for recruiters and reducing friction for returning visitors.
 - **Set up 5 spam checks** on the contact form and **cut low-quality submissions**, so real recruiter outreach was easier to identify and respond to quickly.
-- **Split styles into 12 small CSS modules** (under **200 lines each**), making edits safer and reducing accidental UI regressions during rapid updates.
-- **Auto-generated and validated 13 resume variants** and **kept role-specific links consistent**, so resume content stayed accurate whenever project details changed.
+- **Organized styles into focused CSS modules**, keeping theme, layout and print rules easier to inspect and maintain.
+- **Auto-generated and validated 25 resume variants** and **kept role-specific links consistent**, so resume content stayed accurate whenever project details changed.
 
 ### `it-support`
 - **Built a portfolio that is easy to scan** with a **6-panel desktop layout**, so recruiters can find key information quickly on both desktop and mobile.

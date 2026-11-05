@@ -1,3 +1,5 @@
+import { masterResumeVariants } from './resume-master-variants.mjs';
+
 /**
  * Resume Data Structure
  *
@@ -67,7 +69,19 @@ export type ResumeVariantId =
   | 'it-support-sql'
   | 'it-support-aws'
   | 'sales'
-  | 'call-centre';
+  | 'call-centre'
+  | 'applied-ai'
+  | 'developer-tools'
+  | 'cloud-native'
+  | 'backend-api'
+  | 'automation-data'
+  | 'python-nerdwallet'
+  | 'support-automation'
+  | 'frontend'
+  | 'browser-extensions'
+  | 'qa-automation'
+  | 'linux-self-hosting'
+  | 'technical-documentation';
 
 export interface ResumeVariantDefinition {
   id: ResumeVariantId;
@@ -572,7 +586,7 @@ const defaultSectionTitles: ResumeSectionTitles = {
 
 export const DEFAULT_RESUME_VARIANT_ID: ResumeVariantId = 'ai-web-dev';
 
-export const resumeVariants: ResumeVariantDefinition[] = [
+const _legacyResumeVariants: ResumeVariantDefinition[] = [
   {
     id: 'ai-web-dev',
     label: 'AI + Web Dev',
@@ -1243,29 +1257,43 @@ export const resumeVariants: ResumeVariantDefinition[] = [
   },
 ];
 
+export const resumeVariants: ResumeVariantDefinition[] = masterResumeVariants;
+
 type RedHatSection = 'cloud' | 'support';
 
 const expectedRedHatSectionByVariant: Record<ResumeVariantId, RedHatSection> = {
-  'ai-web-dev': 'cloud',
-  'web-dev': 'cloud',
+  'applied-ai': 'cloud',
   'ai-agentic': 'cloud',
-  aws: 'cloud',
-  python: 'cloud',
-  'aws-web-dev': 'cloud',
+  'developer-tools': 'cloud',
+  'cloud-native': 'cloud',
+  'aws': 'cloud',
   'aws-python': 'cloud',
+  'backend-api': 'cloud',
+  'aws-web-dev': 'cloud',
+  'ai-web-dev': 'cloud',
+  'automation-data': 'cloud',
+  'python': 'cloud',
   'web-dev-django': 'cloud',
-  'it-support': 'support',
-  'it-support-sql': 'support',
-  'it-support-aws': 'support',
-  sales: 'support',
-  'call-centre': 'support',
+  'python-nerdwallet': 'cloud',
+  'support-automation': 'cloud',
+  'frontend': 'cloud',
+  'web-dev': 'cloud',
+  'browser-extensions': 'cloud',
+  'qa-automation': 'cloud',
+  'linux-self-hosting': 'cloud',
+  'technical-documentation': 'cloud',
+  'it-support-aws': 'cloud',
+  'it-support-sql': 'cloud',
+  'it-support': 'cloud',
+  'sales': 'cloud',
+  'call-centre': 'cloud',
 };
 
 function matchesExperienceTemplate(entry: WorkExperience, template: WorkExperience): boolean {
   return (
     entry.company === template.company &&
     entry.title === template.title &&
-    entry.date === template.date
+    entry.date.replace(/[—–]/g, '-') === template.date.replace(/[—–]/g, '-')
   );
 }
 
@@ -1335,17 +1363,29 @@ export const resumeVariantByFileName: Record<string, ResumeVariantDefinition> =
   }, {} as Record<string, ResumeVariantDefinition>);
 
 export const orderedResumeVariantIds: ResumeVariantId[] = [
-  'ai-web-dev',
-  'web-dev',
+  'applied-ai',
   'ai-agentic',
-  'web-dev-django',
-  'python',
+  'developer-tools',
+  'cloud-native',
   'aws',
-  'aws-web-dev',
   'aws-python',
-  'it-support',
-  'it-support-sql',
+  'backend-api',
+  'aws-web-dev',
+  'ai-web-dev',
+  'automation-data',
+  'python',
+  'web-dev-django',
+  'python-nerdwallet',
+  'support-automation',
+  'frontend',
+  'web-dev',
+  'browser-extensions',
+  'qa-automation',
+  'linux-self-hosting',
+  'technical-documentation',
   'it-support-aws',
+  'it-support-sql',
+  'it-support',
   'sales',
   'call-centre',
 ];

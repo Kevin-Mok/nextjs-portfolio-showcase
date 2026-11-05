@@ -1,5 +1,7 @@
 # Resume Maintenance Guide
 
+Maintain the 25 live résumé drafts by editing `lib/resume-master-variants.mjs`, then build, calibrate and validate their PDFs. `lib/resume-data.ts` exports the typed catalog, selection helpers and compatibility data; its retained `_legacyResumeVariants` are not rendered. Keep the master reference and parity tests aligned when changing approved copy.
+
 ## Overview
 
 This guide covers how to update, maintain, and manage the resume feature.
@@ -10,12 +12,12 @@ This guide covers how to update, maintain, and manage the resume feature.
 
 **File**: `lib/resume-data.ts`
 
-All resume content lives in this single TypeScript file. Update `resumeVariants` to change what appears on the homepage tile, `/resume` page, and generated PDF downloads.
+Live resume copy lives in `lib/resume-master-variants.mjs` and is exported by this TypeScript file. Update `masterResumeVariants` to change what appears on the homepage tile, `/resume` page, and generated PDF downloads.
 The default resume shown at `/resume` is controlled by `DEFAULT_RESUME_VARIANT_ID`, which currently points to `ai-web-dev`.
 
 ### Updating Contact Information
 
-**Location**: `resumeVariants[*].resume.contact` object
+**Location**: `masterResumeVariants[*].resume.contact` object
 
 ```typescript
 export const resumeVariants = [
@@ -37,7 +39,7 @@ export const resumeVariants = [
 
 ### Adding a New Project
 
-**Location**: `resumeVariants[*].resume.projects` array
+**Location**: `masterResumeVariants[*].resume.projects` array
 
 Use `resume.projects` for the main web/project section and `agenticEngineering` when a variant needs a dedicated AI/devtools project section.
 
@@ -69,7 +71,7 @@ projects: [
 
 ### Updating Work Experience
 
-**Location**: `resumeVariants[*].resume.experience` array
+**Location**: `masterResumeVariants[*].resume.experience` array
 
 ```typescript
 experience: [
@@ -95,7 +97,7 @@ experience: [
 
 ### Updating Skills
 
-**Location**: `resumeVariants[*].resume.skills`, `skillsBold`, `skillsHtmlLines`, or `skillsLines`
+**Location**: `masterResumeVariants[*].resume.skills`, `skillsBold`, `skillsHtmlLines`, or `skillsLines`
 
 ```typescript
 skills: [
@@ -126,7 +128,7 @@ Skills are:
 
 ### Updating Education
 
-**Location**: `resumeVariants[*].resume.education` array
+**Location**: `masterResumeVariants[*].resume.education` array
 
 ```typescript
 education: [

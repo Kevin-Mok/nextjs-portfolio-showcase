@@ -41,7 +41,9 @@ export const WorkEntry: React.FC<WorkEntryProps> = ({ work }) => {
         ) : (
           <span className="entry-position">{work.title}</span>
         )}
-        <span className="entry-tech-inline">&lt;{work.languages.join(', ')}&gt;</span>
+        {work.languages.length > 0 && (
+          <span className="entry-tech-inline">&lt;{work.languages.join(', ')}&gt;</span>
+        )}
         {work.evidenceUrl ? (
           <a
             href={work.evidenceUrl}

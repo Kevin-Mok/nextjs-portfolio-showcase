@@ -11,3 +11,5 @@
 - 2026-04-10: When updating AI-focused resume intro copy, explicitly state that shipped code is manually reviewed and that final responsibility stays with the engineer when the user asks for that framing.
 - 2026-04-10: When editing Agentic Engineering project copy, use "command line" spelling out CLI when requested, and avoid inconsistent shorthand in bullets.
 - 2026-04-10: When changing resume source content, always regenerate resume PDFs (`npm run generate-resume-pdfs`), and ensure build-dependent gates are rerun if layout is touched.
+
+- 2026-11-05: Run the production preview only after résumé calibration finishes. Calibration rebuilds `.next`; starting `next start` concurrently can hit a missing build ID or stale build files.

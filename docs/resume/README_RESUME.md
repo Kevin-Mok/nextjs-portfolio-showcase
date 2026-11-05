@@ -1,5 +1,7 @@
 # Resume Feature Documentation
 
+The site offers 25 role-specific drafts in the existing selector. Select a draft on `/resume`, download its PDF, and run generation, calibration and validation after editing live copy.
+
 ## Quick Start
 
 The resume feature is fully implemented and live on your portfolio site.
@@ -8,6 +10,12 @@ The resume feature is fully implemented and live on your portfolio site.
 - Homepage tile: Click "Resume" in sidebar or "resume" in polybar
 - Full page: Visit `/resume`
 - PDF download: Select variant and click "Download PDF"
+
+## Master draft catalog
+
+The [master reference](./MASTER_DRAFTS.md) supplies the integrated 25 drafts and source notes. Live copy is in `lib/resume-master-variants.mjs`, exported through `lib/resume-data.ts`; the Markdown file is not parsed at runtime. Existing IDs, default and download names are preserved. Review the [positioning guide](./RESUME_VARIANT_POSITIONING.md) before choosing a draft.
+
+After copy changes run `npm run build`, `npm run calibrate:resume-layout`, `npm run verify:resume-layout`, and `npm run validate-resume-pdfs`, in that order.
 
 ## Documentation Index
 
@@ -344,7 +352,7 @@ Browser renders professional LaTeX-styled resume
 
 ✅ **Single source of truth**: `lib/resume-data.ts` controls all content
 ✅ **Professional styling**: Computer Modern Serif font, LaTeX aesthetic
-✅ **Multiple PDF variants**: 40+ versions for different opportunities
+✅ **Multiple PDF variants**: 25 active drafts for different opportunities
 ✅ **Responsive design**: Mobile-friendly, works on all devices
 ✅ **SEO optimized**: Proper metadata, Open Graph tags
 ✅ **Easy to maintain**: Simple TypeScript data structure

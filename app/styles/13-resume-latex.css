@@ -456,8 +456,8 @@
 }
 
 .resume-variant-web-dev {
-  --resume-print-scale: 1.14;
-  --resume-print-leading: 0.9;
+  --resume-print-scale: 1.16;
+  --resume-print-leading: 1.0;
   --resume-print-top-offset: -12pt;
   --resume-print-min-section-gap: 0.42rem;
   --resume-print-min-entry-gap: 0.3rem;
@@ -468,9 +468,9 @@
 }
 
 .resume-variant-ai-agentic {
-  --resume-print-scale: 1.161;
-  --resume-print-leading: 0.9;
-  --resume-print-top-offset: 12.431pt;
+  --resume-print-scale: 1.245;
+  --resume-print-leading: 1.05;
+  --resume-print-top-offset: 25.023pt;
   --resume-print-min-section-gap: 0.36rem;
   --resume-print-min-entry-gap: 0.24rem;
   --resume-print-min-subtitle-gap: 0.08rem;
@@ -480,32 +480,38 @@
 }
 
 .resume-variant-aws {
-  --resume-print-scale: 1.14;
-  --resume-print-leading: 0.962;
-  --resume-print-top-offset: -6.847pt;
+  --resume-print-scale: 1.303;
+  --resume-print-leading: 1.089;
+  --resume-print-top-offset: -12pt;
 }
 
 .resume-variant-python {
-  --resume-print-scale: 1.14;
+  --resume-print-scale: 1.155;
   --resume-print-top-offset: -12pt;
-  --resume-print-leading: 0.9;
+  --resume-print-leading: 0.998;
+}
+
+.resume-variant-python-nerdwallet {
+  --resume-print-scale: 1.16;
+  --resume-print-top-offset: -12pt;
+  --resume-print-leading: 0.95;
 }
 
 .resume-variant-aws-web-dev {
-  --resume-print-scale: 1.182;
-  --resume-print-leading: 0.978;
+  --resume-print-scale: 1.23;
+  --resume-print-leading: 1.03;
   --resume-print-top-offset: 0.819pt;
 }
 
 .resume-variant-aws-python {
-  --resume-print-scale: 1.14;
-  --resume-print-leading: 0.919;
+  --resume-print-scale: 1.235;
+  --resume-print-leading: 1.044;
   --resume-print-top-offset: -12pt;
 }
 
 .resume-variant-web-dev-django {
-  --resume-print-scale: 1.14;
-  --resume-print-leading: 0.996;
+  --resume-print-scale: 1.18;
+  --resume-print-leading: 1.02;
   --resume-print-top-offset: 0.666pt;
 }
 
@@ -516,9 +522,9 @@
 }
 
 .resume-variant-it-support-sql {
-  --resume-print-scale: 1.08;
+  --resume-print-scale: 1.2;
   --resume-print-top-offset: -7.347pt;
-  --resume-print-leading: 0.9;
+  --resume-print-leading: 1.0;
   --resume-print-min-section-gap: 0.36rem;
   --resume-print-min-entry-gap: 0.24rem;
   --resume-print-min-subtitle-gap: 0.08rem;
@@ -534,14 +540,14 @@
 }
 
 .resume-variant-sales {
-  --resume-print-scale: 1.191;
-  --resume-print-leading: 0.978;
+  --resume-print-scale: 1.28;
+  --resume-print-leading: 1.03;
   --resume-print-top-offset: 5.619pt;
 }
 
 .resume-variant-call-centre {
-  --resume-print-scale: 1.194;
-  --resume-print-leading: 0.99;
+  --resume-print-scale: 1.3;
+  --resume-print-leading: 1.05;
   --resume-print-top-offset: 3.805pt;
 }
 
@@ -621,6 +627,11 @@
   @page {
     size: Letter;
     margin: 0.16in 0.2in;
+  }
+
+  .resume-latex,
+  .resume-latex * {
+    color: #000000 !important;
   }
 
   html,
@@ -776,4 +787,72 @@
 .pdf-download-btn:focus {
   outline: 2px solid #1e4fa3;
   outline-offset: 2px;
+}
+
+/* Master draft categories; print controls are calibrated per variant. */
+
+.resume-variant-backend-api {
+  --resume-print-scale: 1.16;
+  --resume-print-leading: 1.0;
+  --resume-print-top-offset: -12pt;
+}
+
+.resume-variant-developer-tools {
+  --resume-print-scale: 1.16;
+  --resume-print-leading: 1.0;
+  --resume-print-top-offset: -12pt;
+}
+
+.resume-variant-automation-data {
+  --resume-print-scale: 1.16;
+  --resume-print-leading: 1.0;
+  --resume-print-top-offset: -12pt;
+}
+
+.resume-variant-cloud-native {
+  --resume-print-scale: 1.25;
+  --resume-print-leading: 1.05;
+  --resume-print-top-offset: -12pt;
+}
+
+.resume-variant-frontend {
+  --resume-print-scale: 1.16;
+  --resume-print-leading: 1.0;
+  --resume-print-top-offset: -12pt;
+}
+
+.resume-variant-applied-ai {
+  --resume-print-scale: 1.16;
+  --resume-print-leading: 1.0;
+  --resume-print-top-offset: -12pt;
+}
+
+.resume-variant-qa-automation {
+  --resume-print-scale: 1.16;
+  --resume-print-leading: 1.0;
+  --resume-print-top-offset: -12pt;
+}
+
+.resume-variant-browser-extensions {
+  --resume-print-scale: 1.16;
+  --resume-print-leading: 1.0;
+  --resume-print-top-offset: -12pt;
+}
+
+.resume-variant-linux-self-hosting {
+  --resume-print-scale: 1.16;
+  --resume-print-leading: 1.0;
+  --resume-print-top-offset: -12pt;
+}
+
+.resume-variant-support-automation {
+  --resume-print-scale: 1.16;
+  --resume-print-leading: 1.0;
+  --resume-print-top-offset: -12pt;
+}
+
+.resume-variant-technical-documentation {
+  --resume-print-scale: 1.25;
+  --resume-print-leading: 1.05;
+  --resume-print-top-offset: -12pt;
 }
