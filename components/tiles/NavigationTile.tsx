@@ -51,6 +51,11 @@ const NavigationTile: React.FC<NavigationTileProps> = ({ onContentSelect, isBlur
       return;
     }
 
+    if (content.type === 'resume') {
+      router.push('/resume');
+      return;
+    }
+
     // About and Contact: Update FocusContext for tiled mode display
     if (onContentSelect) {
       onContentSelect(content);

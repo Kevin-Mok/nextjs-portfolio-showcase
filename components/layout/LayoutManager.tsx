@@ -126,7 +126,7 @@ const LayoutManager: React.FC = () => {
   };
 
 
-  // Handle navigation from polybar - route projects/blog to list pages, about/contact to tiled
+  // Handle navigation from polybar - route projects/blog/resume to pages, about/contact to tiled
   const handlePolybarNavigate = (section: string) => {
     // Projects and blogs navigate to list pages (real Next.js routes)
     if (section === 'projects') {
@@ -136,6 +136,11 @@ const LayoutManager: React.FC = () => {
 
     if (section === 'blog') {
       router.push('/blog');
+      return;
+    }
+
+    if (section === 'resume') {
+      router.push('/resume');
       return;
     }
 

@@ -5,6 +5,13 @@
   color: #000000;
 }
 
+@media screen {
+  .resume-page-container {
+    max-width: 8.5in;
+    margin-inline: auto;
+  }
+}
+
 .resume-latex {
   background-color: #ffffff;
   color: #000000;

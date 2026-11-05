@@ -7,7 +7,7 @@ The site offers 25 role-specific drafts in the existing selector. Select a draft
 The resume feature is fully implemented and live on your portfolio site.
 
 **Quick access**:
-- Homepage tile: Click "Resume" in sidebar or "resume" in polybar
+- Homepage navigation: Click "Resume" in sidebar or "resume" in polybar to open `/resume`.
 - Full page: Visit `/resume`
 - PDF download: Select variant and click "Download PDF"
 

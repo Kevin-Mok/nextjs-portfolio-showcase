@@ -40,6 +40,7 @@ A production-ready developer portfolio built with Next.js 15, featuring a tiled 
 
 - **Desktop Layout**: 6-tile Hyprland-inspired layout (Neofetch, Navigation, Content, Theme Preset, Accent Color, Background)
 - **Keyboard Navigation**: Vim-style hjkl movement + Tab cycling + workspace indicators via Polybar
+- **Resume Navigation**: The desktop Resume workspace, Contents entry and mobile résumé CTA open the standalone `/resume` page, centered at US Letter PDF width on desktop.
 - **Mobile Experience**: Parallax scrolling with depth effects and scroll progress indicators
 - **Theme System**: 3 curated presets (Tokyo Night, Nord, Solarized Light) + 15 accent color swatches
 - **Content Management**: MDX-powered blog and projects with syntax highlighting and reading time
@@ -103,6 +104,10 @@ GALLERY_TEST_URL=http://localhost:3000 npx playwright test --config playwright.g
 
 `npm run build` also regenerates all 25 active resume PDFs in `public/resume/`. Browse them in the `/resume` selector or open `/resume?variant=developer-tools`. The [variant guide](docs/resume/RESUME_VARIANT_POSITIONING.md) explains role fit and evidence limits.
 Resume PDF rendering uses local Computer Modern assets in `public/fonts/cmu/` for deterministic layout metrics.
+
+PDF generation requires Chrome or Chromium; set `CHROME_BIN` to use a specific executable. PDF validation also requires Poppler's `pdfinfo`, `pdffonts` and `pdftotext` utilities.
+
+Pass script options after npm's `--` separator. Calibration accepts `--variant <id>`, `--dry-run` and `--max-iterations <n>`; layout verification accepts `--pdf <file>` and `--json`; measurement accepts `--json`.
 
 ```bash
 npm run measure:resume-layout   # Measure bottom whitespace for all generated resume PDFs

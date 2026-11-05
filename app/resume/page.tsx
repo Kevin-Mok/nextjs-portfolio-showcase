@@ -68,7 +68,7 @@ export default async function ResumePage({ searchParams }: ResumePageProps) {
 
   return (
     <div className="bg-white text-black min-h-screen py-6 sm:py-8 px-3 sm:px-5 md:px-6 lg:px-8">
-      <div className="mx-auto w-full max-w-[1180px]">
+      <div className="resume-page-container mx-auto w-full max-w-[1180px]">
         <div className="resume-page-surface">
           <ResumeContent initialVariantId={initialVariantId} renderMode={renderMode} />
         </div>

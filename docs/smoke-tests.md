@@ -4,6 +4,9 @@ Use these checks after résumé changes to confirm selection, downloads, track s
 
 ## Resume
 
+- Action: From the desktop homepage, click Resume in the top workspace bar, use browser Back, then click Resume under Contents. Repeat with the existing mobile résumé CTA.
+  Expected: Each opens the standalone `/resume` page and updates the address bar. Browser Back returns to the homepage; About still selects homepage content. Reloading `/resume` keeps the standalone page.
+
 - Action: Open `/resume-gallery` directly at desktop and phone widths. Scroll through every thumbnail, then activate a thumbnail or its name using mouse, Enter and Space.
   Expected: All active `pdfVariants` appear in metadata order with the existing labels underneath actual first-page previews. The dark `#0d1117` surface covers the portfolio background. The gallery has no public navigation or sitemap link and its HTML carries `noindex, nofollow`; it is unlisted, without authentication.
 
@@ -38,7 +41,7 @@ Use these checks after résumé changes to confirm selection, downloads, track s
   Expected: Their master-derived copy renders, existing filenames remain stable, and the selected Red Hat role is Cloud/Software Engineer Intern without a second support role. Marketplace entries show no empty technology brackets. Page/font/layout validation passes.
 
 - Action: At desktop and mobile widths, tab through résumé controls, change variants and download a PDF.
-  Expected: Controls remain visible and keyboard accessible, the chosen variant renders without horizontal clipping, and the downloaded filename matches the selected variant.
+  Expected: The standalone `/resume` document is centered and at most 8.5in (816 CSS pixels) wide on desktop, matching a US Letter PDF sheet. It shrinks within page gutters on mobile without horizontal clipping. Controls remain visible and keyboard accessible, and the downloaded filename matches the selected variant. Printed/PDF layout retains its existing Letter dimensions and margins.
 
 - Action: Open `/resume?variant=developer-tools`, `/resume?variant=browser-extensions` and `/resume?variant=call-centre`, change the selector, and download each PDF.
   Expected: The selector offers 25 drafts in the requested ranking: Applied AI first, AI/Agentic second, Developer Tools third, Sales next-to-last and Call Centre last; no salary figures appear. Direct IDs and PDF-filename query values resolve correctly. Projects lead in developer-tools and browser-extensions; Experience leads in call-centre. Each download contains the selected draft with no source IDs or audit notes.
