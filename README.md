@@ -19,7 +19,7 @@ A production-ready developer portfolio built with Next.js 15, featuring a tiled 
 
 ---
 
-## Why This Repo Stands Out
+### Why This Repo Stands Out
 
 - It is not a generic portfolio shell. The site ships a Hyprland-inspired desktop UI, a distinct mobile layout, MDX-backed writing, and a resume system with automated PDF generation and layout validation in one repo.
 - The repo shows product thinking, not just frontend polish: contact delivery, spam protection, CDN-aware media handling, typed content pipelines, and recruiter-ready resume workflows are all versioned together.
@@ -34,6 +34,7 @@ A production-ready developer portfolio built with Next.js 15, featuring a tiled 
 - **Resend + Zod**: gives the contact flow production email delivery plus schema-validated input handling.
 - **Local resume PDF tooling**: the repo generates and validates 25 resume variants with local Computer Modern fonts, layout baselines, and deterministic PDF checks.
 - **Optional Cloudflare R2**: keeps the project deployable without CDN setup while still supporting a faster production media path.
+- **PDF.js + Playwright**: render locally hosted PDFs at their selected scale and check the reading controls against generated documents in Chrome.
 
 ## ✨ Features
 
@@ -50,12 +51,12 @@ A production-ready developer portfolio built with Next.js 15, featuring a tiled 
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Install and Bootstrap
 
 ### Prerequisites
 
 ```bash
-node >= 18.0.0
+node >= 22.3.0
 npm >= 9.0.0
 ```
 
@@ -77,7 +78,9 @@ npm run dev
 
 Visit **http://localhost:3000**
 
-### Build Commands
+## Day-to-Day Usage and Command Reference
+
+Use `npm run dev` for local work and `npm run start` to preview an existing production build. Run type checking and lint before shipping.
 
 ```bash
 npm run build      # Production build
@@ -87,6 +90,14 @@ npm run lint       # Code linting
 ```
 
 These top-level npm entrypoints are normally run exactly as shown here; the repo does not rely on extra README-level flags for day-to-day use.
+
+With Google Chrome installed and the app running, check PDF preview interactions using the printed local URL:
+
+```fish
+GALLERY_TEST_URL=http://localhost:3000 npx playwright test --config playwright.gallery.config.ts
+```
+
+`--config` selects the focused browser suite. Set `GALLERY_TEST_URL` to the server's actual URL if Next.js selects another port; the suite defaults to `http://127.0.0.1:3217` when it is omitted.
 
 ### Resume PDF Workflow
 
@@ -113,7 +124,7 @@ Create `.env.local` from template and configure:
 | Variable | Required | Description |
 |----------|----------|-------------|
 | `RESEND_API_KEY` | ✅ Yes | Resend API key ([resend.com](https://resend.com) - free: 100 emails/day, 3K/month) |
-| `RESEND_FROM_EMAIL` | ✅ Yes | Verified domain email for Resend (e.g., `contact@kmok.ai`) |
+| `RESEND_FROM_EMAIL` | ✅ Yes | Verified sender address on your Resend domain |
 | `NEXT_PUBLIC_CONTACT_EMAIL` | ✅ Yes | Email address to receive form submissions |
 | `NEXT_PUBLIC_CDN_URL` | Optional | Cloudflare R2 CDN URL (e.g., `https://cdn.kmok.ai`) |
 | `NEXT_PUBLIC_NAME` | Recommended | Your full name |

@@ -13,3 +13,7 @@
 - 2026-04-10: When changing resume source content, always regenerate resume PDFs (`npm run generate-resume-pdfs`), and ensure build-dependent gates are rerun if layout is touched.
 
 - 2026-11-05: Run the production preview only after résumé calibration finishes. Calibration rebuilds `.next`; starting `next start` concurrently can hit a missing build ID or stale build files.
+
+- 2026-11-05: In conditionally mounted React PDF dialogs, record the invoker from the activated control's `event.currentTarget`, then close the native dialog before unmounting and restoring focus; explicitly wrap enabled controls for Tab/Shift+Tab. Replace the canvas host when zoom changes so a new percentage never labels an old-scale image. Verify focused and nonfocused activation plus canvas DOM mutations in a real browser.
+
+- 2026-11-05: After adding PDF toolbar controls, check heading height as well as button overlap just above the mobile breakpoint; give the title group a nonzero flex basis so it wraps before collapsing. Sample rendered PDF colors inside blank paper, since fractional screenshot clipping can include the outline at pixel (0,0).

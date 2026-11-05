@@ -82,3 +82,6 @@ blog-post-source
 
 # Local recruiter prompt scratch file
 docs/prompts/RECRUITER_TYPESCRIPT_DYNAMIC_SITE_PROMPT.md
+
+# Local gallery browser screenshots and test artifacts
+/.local/resume-gallery/

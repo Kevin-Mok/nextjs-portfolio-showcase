@@ -1,0 +1,59 @@
+.gallery {
+  --paper: #fff;
+  position: relative;
+  isolation: isolate;
+  min-height: 100dvh;
+  background: #0d1117;
+  color: #f0f6fc;
+  color-scheme: dark;
+  padding: clamp(24px, 5vw, 72px);
+}
+
+.content { max-width: 1500px; margin-inline: auto; }
+.header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 40px; }
+.content h1 { color: inherit; font-size: 20px; font-weight: 500; margin: 0; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); gap: 40px 32px; padding: 0; margin: 0; list-style: none; }
+.grid > li { min-width: 0; }
+.card { display: block; width: 100%; text-align: left; cursor: pointer; border: 0; padding: 0; background: transparent; color: inherit; font: inherit; }
+.paper { display: flex; align-items: center; justify-content: center; width: 100%; aspect-ratio: 17 / 22; background: var(--paper); box-shadow: 0 2px 8px #0006; outline: 1px solid #30363d; overflow: hidden; color: #57606a; font-size: 12px; }
+.paper .pdfPage { box-shadow: none; }
+.label { display: block; font-size: 13px; line-height: 1.6; margin-top: 14px; overflow-wrap: anywhere; }
+.gallery :is(button, a, [tabindex]):focus-visible, .dialog :is(button, a, [tabindex]):focus-visible { outline: 2px solid #58a6ff; outline-offset: 5px; }
+.cardRecovery { display: flex; gap: 16px; margin-top: 12px; font-size: 12px; }
+.cardRecovery button { cursor: pointer; text-decoration: underline; }
+.dialog { position: fixed; inset: 0; width: calc(100% - 40px); height: calc(100dvh - 40px); max-width: none; max-height: none; padding: 0; margin: auto; border: 1px solid #30363d; color: #f0f6fc; background: #0d1117; color-scheme: dark; }
+.dialog::backdrop { background: #010409b3; }
+.viewer { display: flex; flex-direction: column; height: 100%; min-width: 0; }
+.toolbar { display: flex; align-items: center; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding: 12px 18px; background: #010409; border-bottom: 1px solid #30363d; }
+.toolbar h2 { color: inherit; min-width: 0; font-size: 14px; font-weight: 500; overflow-wrap: anywhere; }
+.documentNavigation { display: flex; align-items: center; flex: 1 1 300px; min-width: 0; gap: 8px; }
+.documentNavigation h2 { flex: 1; margin-left: 8px; }
+.tools { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.tools output { width: 5ch; text-align: center; font-size: 13px; font-variant-numeric: tabular-nums; }
+.tools button, .documentNavigation button, .message button, .invertToggle { min-height: 40px; min-width: 40px; border: 1px solid #3d444d; background: #212830; color: inherit; padding: 6px 10px; font: inherit; font-size: 13px; cursor: pointer; }
+.tools button:disabled, .documentNavigation button:disabled { opacity: .4; cursor: default; }
+.tools button[aria-pressed="true"], .invertToggle[aria-pressed="true"] { background: #303b48; border-color: #8b949e; }
+.colorFilter { position: fixed; pointer-events: none; }
+.inverted { --paper: #0d1117; }
+.inverted .pdfPage canvas { filter: url("#resume-gallery-colors"); }
+.inverted .paper, .inverted .renderStatus { color: #8b949e; }
+.scroller { flex: 1; min-height: 0; overflow: auto; overscroll-behavior: contain; padding: 16px; }
+.pages { display: flex; flex-direction: column; align-items: center; gap: 16px; width: max-content; min-width: 100%; }
+.pdfPage { position: relative; flex: none; width: max-content; background: var(--paper); box-shadow: 0 1px 6px #0006; outline: 1px solid #30363d; }
+.renderStatus { display: block; padding: 12px; font-size: 12px; color: #62635d; }
+.pdfPage canvas { display: block; max-width: none; }
+.message { text-align: center; padding: 32px 12px; font-size: 14px; }
+.message button { margin-top: 12px; }
+.directLink { color: inherit; align-self: flex-end; margin: 8px 18px; font-size: 12px; text-decoration: underline; }
+.cardRecovery a { color: inherit; }
+.screenReaderText { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+@media (max-width: 600px) {
+  .dialog { width: 100%; height: 100dvh; border: 0; }
+  .toolbar { padding: 12px; gap: 8px; }
+  .documentNavigation { flex-basis: 100%; }
+  .tools { width: 100%; justify-content: space-between; gap: 4px; }
+  .tools button, .documentNavigation button, .invertToggle { min-height: 44px; min-width: 44px; }
+  .gallery { padding: 24px 20px; }
+  .grid { gap: 32px 20px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .label { font-size: 12px; }
+}

@@ -4,6 +4,21 @@ Use these checks after résumé changes to confirm selection, downloads, track s
 
 ## Resume
 
+- Action: Open `/resume-gallery` directly at desktop and phone widths. Scroll through every thumbnail, then activate a thumbnail or its name using mouse, Enter and Space.
+  Expected: All active `pdfVariants` appear in metadata order with the existing labels underneath actual first-page previews. The dark `#0d1117` surface covers the portfolio background. The gallery has no public navigation or sitemap link and its HTML carries `noindex, nofollow`; it is unlisted, without authentication.
+
+- Action: Use “Invert PDF colors” in the gallery header and expanded viewer with mouse and Space, then zoom, close and open another resume. Reload afterward.
+  Expected: Inversion starts enabled, mapping PDF paper to `#0d1117` and dark text to `#f0f6fc`. Turning it off restores original PDF colors while the shell stays dark. Both controls share the same state across thumbnails, zoom and document changes. Reload resets inversion to enabled; direct PDF files retain their original colors.
+
+- Action: Use Prev and Next in the viewer, including the first and last resumes, after zooming and toggling PDF colors.
+  Expected: Navigation follows gallery order without returning to the grid. Prev is disabled at the first resume and Next at the last. Each resume opens fitted, retains the color setting and uses the matching direct PDF link. Closing restores focus to the card that initially opened the viewer. All controls fit on phones.
+
+- Action: In a gallery preview, use Zoom in/out to both limits, Fit page, resize, Tab/Shift+Tab, Escape and Close; reopen another resume. At 250%, scroll to the right and bottom edges.
+  Expected: The toolbar stays visible; the percentage matches sharp PDF rendering, moving 25 percentage points per click between 25% and 250%. Fit responds to resize, each opened resume starts fitted, all document edges are reachable, focus stays inside the modal, background scrolling is blocked and closing restores focus to the activated card. Phones use the full viewport and all controls remain reachable.
+
+- Action: Use browser request blocking to block one `/resume/*.pdf`, reload the gallery and open that resume. Remove the block and select Retry; open a different card afterward.
+  Expected: The failed thumbnail and viewer show clear recovery controls and a direct PDF link. Retry renders the restored file and other cards still work. Automated repeat: `npx playwright test --config playwright.gallery.config.ts` against the server configured by `GALLERY_TEST_URL` (default `http://127.0.0.1:3217`). Chrome must be installed. Screenshots and failure artifacts stay under `.local/resume-gallery/`.
+
 - Action: Open `/resume` and confirm the selected dropdown label is `AI + Web Dev`.
   Expected: The default draft shows its web development/session analytics/transcription intro, ntcharts and Red Hat experience, Toronto Zoo Blog and Codex Session Analytics projects, and the existing AI + Web Dev PDF filename.
 
